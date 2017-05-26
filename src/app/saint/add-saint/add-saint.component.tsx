@@ -2,7 +2,7 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {SaintActions} from '../saint.actions';
 import {Saint} from '../saint';
-import {AppActions} from '../../app.actions';
+import {BrowserRouter} from "react-router-dom";
 
 const mapStateToProps = (state) => {
     return {
@@ -26,9 +26,9 @@ export class AddSaintComponent extends React.Component<any, any> {
             name: this.state.name,
             coffee: 0
         };
-        // this.props.dispatch(AppActions.loading(true));
+
         this.props.dispatch(SaintActions.add(newSaint));
-        this.props.dispatch(AppActions.setView(''));
+        this.props.history.push('/');
     }
 
     private onSaintChange(event) {
@@ -36,8 +36,6 @@ export class AddSaintComponent extends React.Component<any, any> {
     }
 
     public render() {
-        let saints = this.props.saints;
-
         return (
             <div>
                 <form onSubmit={(e) => this.onSubmit(e)}>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {AppActions} from '../../app.actions';
 import {SaintStore} from '../saint.store';
+import {Link} from "react-router-dom";
 
 const mapStateToProps = (state) => {
     return {
@@ -20,32 +20,30 @@ export class SaintChooserComponent extends React.Component<any, { app: any, sain
         let saints = this.props.saints.saintsList.saints;
         let saintsLoading = this.props.saints.saintsList.loading;
 
-        let saintItem = (saint, index) => (
+        return (<form>
+            <h1>Choose your Saint</h1>
+            <Link to="/add">Add a saint</Link>
+            {this.saintList(saints, saintsLoading)}
+            <button type="submit">Who Buys?</button>
+        </form>);
+    }
+
+    private saintList (saints, loading) {
+        if (loading) {
+            return (<div className="loading">Loading...</div>);
+        }
+        else {
+            return (<ul>{saints.map(this.saintItem)}</ul>);
+        }
+    }
+
+    private saintItem (saint, index) {
+        return (
             <li key={index}>
                 <input id={'saint' + index} type="checkbox"/>
                 <label htmlFor={'saint' + index}>{saint.name}</label>
                 <div className="thumb"><img src=""/></div>
             </li>
         );
-
-        let list;
-        if (!saintsLoading) {
-            list = (<ul>{saints.map(saintItem)}</ul>);
-        }
-        else {
-            list = (<div className="loading">Loading...</div>);
-        }
-
-        return (<form>
-            <h1>Choose your Saint</h1>
-            <button onClick={(e) => this.addSaint(e)}>Add a saint</button>
-            {list}
-            <button type="submit">Who Buys?</button>
-        </form>);
-    }
-
-    public addSaint(e: React.MouseEvent<HTMLButtonElement>) {
-        e.preventDefault();
-        this.props.dispatch(AppActions.setView('add'));
     }
 }
