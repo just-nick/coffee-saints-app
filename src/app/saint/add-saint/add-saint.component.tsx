@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {SaintActions} from '../saint/saint.actions';
-import {Saint} from '../saint/saint';
-import {AppActions} from '../app/app.actions';
+import {SaintActions} from '../saint.actions';
+import {Saint} from '../saint';
+import {AppActions} from '../../app.actions';
 
 const mapStateToProps = (state) => {
     return {
@@ -26,13 +26,9 @@ export class AddSaintComponent extends React.Component<any, any> {
             name: this.state.name,
             coffee: 0
         };
-        this.props.dispatch(AppActions.loading(true));
-        this.props.dispatch(SaintActions.addSaint(newSaint)).then(() => {
-            this.props.dispatch(AppActions.setView(''));
-            this.props.dispatch(AppActions.loading(false));
-        }, () => {
-            this.props.dispatch(AppActions.loading(false));
-        });
+        // this.props.dispatch(AppActions.loading(true));
+        this.props.dispatch(SaintActions.add(newSaint));
+        this.props.dispatch(AppActions.setView(''));
     }
 
     private onSaintChange(event) {

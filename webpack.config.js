@@ -21,12 +21,22 @@ module.exports = {
         }]
     },
     devServer: {
-        contentBase: "./public",
+        contentBase: "./mock-api",
         // enable HMR
         //hot: true,
         // embed the webpack-dev-server runtime into the bundle
         inline: true,
-        historyApiFallback: true
+        historyApiFallback: true,
+        proxy: {
+            '/api': {
+                target: 'http://www.mocky.io',
+                changeOrigin: true,
+                secure: false,
+                pathRewrite: {
+                    '^/api': '/v2'
+                }
+            }
+        }
     },
     plugins: [
         new HtmlWebpackPlugin({

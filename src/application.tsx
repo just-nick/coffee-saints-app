@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {Provider, connect} from 'react-redux';
-import {SaintChooserComponent} from './saint-chooser/saint-chooser.component';
-import {AddSaintComponent} from './add-saint/add-saint.component';
+import {SaintChooserComponent} from './app/saint/saint-chooser/saint-chooser.component';
+import {AddSaintComponent} from './app/saint/add-saint/add-saint.component';
+import {SaintActions} from './app/saint/saint.actions';
 
 const mapStateToProps = (state) => {
     return {app: state.appReducer}
@@ -12,6 +13,7 @@ export default class Application extends React.Component<any, any> {
     constructor(props){
         super(props);
         console.log(this.props.app);
+        this.props.dispatch(SaintActions.find());
     }
 
     render() {
