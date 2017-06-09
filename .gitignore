@@ -1,4 +1,8 @@
+# IDE
+# - CleverJ
 /.idea
+*.iml
+
+# Application
 /node_modules
 /dist
-root.iml
