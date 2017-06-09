@@ -1,17 +1,12 @@
 import * as React from 'react';
-import {connect, Provider} from 'react-redux';
+import {connect, DispatchProp, Provider, ProviderProps} from 'react-redux';
 import {BrowserRouter, Route} from 'react-router-dom';
-import {AddSaintComponent} from './app/saint/add-saint/add-saint.component';
+import AddSaintComponent from './app/saint/add-saint/add-saint.component';
 import {SaintActions} from './app/saint/saint.actions';
-import {SaintChooserComponent} from './app/saint/saint-chooser/saint-chooser.component';
+import SaintChooserComponent from './app/saint/saint-chooser/saint-chooser.component';
 
-const mapStateToProps = (state) => {
-    return {app: state.appReducer}
-};
-
-@connect(mapStateToProps)
-export default class Application extends React.Component<any, any> {
-    constructor(props) {
+class Application extends React.Component<ProviderProps & DispatchProp<any>, {}> {
+    constructor(props: ProviderProps & DispatchProp<any>) {
         super(props);
         this.props.dispatch(SaintActions.find());
     }
@@ -29,3 +24,5 @@ export default class Application extends React.Component<any, any> {
         );
     }
 }
+
+export default connect<{}, {}, ProviderProps>(() => ({}))(Application);

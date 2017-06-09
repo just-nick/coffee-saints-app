@@ -1,19 +1,11 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
+import {connect, DispatchProp} from 'react-redux';
 import {SaintActions} from '../saint.actions';
 import {Saint} from '../saint';
-import {BrowserRouter} from "react-router-dom";
+import {RouteComponentProps} from "react-router-dom";
 
-const mapStateToProps = (state) => {
-    return {
-        saints: state.saintReducer,
-        app: state.appReducer
-    }
-};
-
-@(connect(mapStateToProps) as any)
-export class AddSaintComponent extends React.Component<any, any> {
-    constructor(props) {
+class AddSaintComponent extends React.Component<AddSaintComponentProps, AddSaintComponentState> {
+    constructor(props: AddSaintComponentProps) {
         super(props);
         this.state = {
             name: ''
@@ -31,7 +23,7 @@ export class AddSaintComponent extends React.Component<any, any> {
         this.props.history.push('/');
     }
 
-    private onSaintChange(event) {
+    private onSaintChange(event: React.ChangeEvent<HTMLInputElement>) {
         this.setState({name: event.target.value});
     }
 
@@ -46,3 +38,10 @@ export class AddSaintComponent extends React.Component<any, any> {
         )
     }
 }
+export default connect(() => {})(AddSaintComponent);
+
+interface AddSaintComponentState {
+    name: string;
+}
+
+interface AddSaintComponentProps extends DispatchProp<any>, RouteComponentProps<any>{}

@@ -35,7 +35,7 @@
   "devDependencies": {
     "@types/react": "^15.0.24",
     "@types/react-dom": "^15.5.0",
-    "@types/react-redux": "^4.4.40",
+    "@types/react-redux": "^4.4.42",
     "@types/react-router-dom": "^4.0.4",
     "@types/redux-promise": "^0.5.24",
     "awesome-typescript-loader": "^3.1.3",

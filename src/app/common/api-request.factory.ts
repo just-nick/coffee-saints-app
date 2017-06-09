@@ -2,7 +2,7 @@ import {CALL_API} from 'redux-api-middleware';
 
 export namespace ApiRequestFactory {
     export function get(types: Array<string>, endpoint: string) {
-        return {
+        return <any> {
             [CALL_API]: {
                 types,
                 endpoint,
@@ -14,7 +14,7 @@ export namespace ApiRequestFactory {
     export function put(types: Array<string>, endpoint: string, body?: Object) {
         let bodyContent = bodyTest(body);
 
-        return {
+        return <any> {
             [CALL_API]: {
                 types,
                 endpoint,
@@ -22,13 +22,13 @@ export namespace ApiRequestFactory {
                 headers: {'Content-Type': bodyContent.contentType},
                 body: bodyContent.body
             }
-        }
+        };
     }
 
     export function post(types: Array<string>, endpoint: string, body?: Object) {
         let bodyContent = bodyTest(body);
 
-        return {
+        return <any> {
             [CALL_API]: {
                 types,
                 endpoint,

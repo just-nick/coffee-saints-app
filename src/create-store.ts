@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 //import * as promiseMiddleware from 'redux-promise';
 import {apiMiddleware} from 'redux-api-middleware';
-import {reducers} from './reducers';
+import {CoffeeSaintsReducers, reducers} from './reducers';
 
-export default function(data?) {
+export default function(data?: CoffeeSaintsReducers) {
     let reducer = combineReducers(reducers);
     return applyMiddleware(
         apiMiddleware
