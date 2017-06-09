@@ -7,12 +7,15 @@
     "jsx": "react",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
     "lib": [
       "dom",
       "es2015"
     ]
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "./@types/**/*.d.ts"
   ]
 }

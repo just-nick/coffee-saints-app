@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "John Coffee",
+    "coffee": 2
+  },
+  {
+    "id": 2,
+    "name": "Tom Coffee",
+    "coffee": 3
+  },
+  {
+    "id": 3,
+    "name": "Dick Coffee",
+    "coffee": 1
+  },
+  {
+    "id": 4,
+    "name": "Ken Coffee",
+    "coffee": 0
+  }
+]

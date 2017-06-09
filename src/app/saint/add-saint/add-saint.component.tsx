@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
     }
 };
 
-@connect(mapStateToProps)
+@(connect(mapStateToProps) as any)
 export class AddSaintComponent extends React.Component<any, any> {
     constructor(props) {
         super(props);

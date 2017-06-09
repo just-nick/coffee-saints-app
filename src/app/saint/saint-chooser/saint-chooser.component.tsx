@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
     }
 };
 
-@connect(mapStateToProps)
+@(connect(mapStateToProps) as any)
 export class SaintChooserComponent extends React.Component<any, { app: any, saints: SaintStore }> {
     constructor(props) {
         super(props);
