@@ -1,5 +1,6 @@
 import {SaintActions} from './saint.actions';
 import {SaintStore} from './saint.store';
+import {ApiRequestAction} from "../common/api-request.action";
 
 let initialState: SaintStore = {
     saintsList: {
@@ -8,7 +9,7 @@ let initialState: SaintStore = {
     }
 };
 
-export function saintReducer(state: SaintStore = initialState, action: ApiRequestAction) {
+export function saintReducer(state: SaintStore = initialState, action: ApiRequestAction): SaintStore {
     switch (action.type) {
         case SaintActions.ADD_SAINT:
             return {
