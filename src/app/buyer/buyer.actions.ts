@@ -9,10 +9,9 @@ export namespace BuyerActions {
     export const SUGGESTED_BUYER_BUYS_FAILURE = 'SUGGESTED_BUYER_BUYS_FAILURE';
 
     export function find(saintIds: Array<number>) {
-        return ApiRequestFactory.put(
+        return ApiRequestFactory.get(
             [FIND_BUYER, FIND_BUYER_SUCCESS, FIND_BUYER_FAILURE],
-            '/api/5927bff01100006b0b6cccd6',
-            saintIds
+            '/api/saints/buying?saintIds=' + saintIds.join(',')
         )
     }
 }

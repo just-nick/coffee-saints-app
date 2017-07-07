@@ -13,9 +13,9 @@ export namespace SaintActions {
     // @TODO Programmatically generating API states
 
     export function add(saint: Saint) {
-        return ApiRequestFactory.put(
+        return ApiRequestFactory.post(
             [ADD_SAINT, ADD_SAINT_SUCCESS, ADD_SAINT_FAILURE],
-            '/api/59278ca3110000eb086ccc83',
+            '/api/saints',
             saint
         );
     }
@@ -23,7 +23,7 @@ export namespace SaintActions {
     export function find() {
         return ApiRequestFactory.get(
             [FIND_SAINT, FIND_SAINT_SUCCESS, FIND_SAINT_FAILURE],
-            '/api/5927a9461100001a0a6ccc9f'
+            '/api/saints'
         )
     }
 }

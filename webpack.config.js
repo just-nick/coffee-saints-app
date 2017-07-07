@@ -22,6 +22,7 @@ module.exports = {
     },
     devServer: {
         contentBase: "./mock-api",
+        port: 4200,
         // enable HMR
         //hot: true,
         // embed the webpack-dev-server runtime into the bundle
@@ -29,11 +30,11 @@ module.exports = {
         historyApiFallback: true,
         proxy: {
             '/api': {
-                target: 'http://www.mocky.io',
+                target: 'http://localhost:8080',
                 changeOrigin: true,
                 secure: false,
                 pathRewrite: {
-                    '^/api': '/v2'
+                    '^/api': '/'
                 }
             }
         }
