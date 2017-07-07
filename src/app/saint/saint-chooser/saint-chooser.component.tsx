@@ -6,6 +6,7 @@ import {SaintStore} from "../saint.store";
 import {RouteComponentProps} from "react-router";
 import {findDOMNode} from "react-dom";
 import {BuyerActions} from "../../buyer/buyer.actions";
+import {BuyerComponent} from "../../buyer/buyer.component";
 
 
 class SaintChooserComponent extends React.Component<SaintChooserComponentProps, SaintChooserComponentState> {
@@ -18,13 +19,16 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
 
     public whoBuys(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        this.props.dispatch(BuyerActions.find(this.state.selectedSaints));
+        const response = this.props.dispatch(BuyerActions.find(this.state.selectedSaints));
+        console.log('whoBuys response: ', response);
+        this.props.history.push('/buy');
     }
 
     public toggleSaint(event: React.ChangeEvent<HTMLInputElement>) {
         // This is seriously outrageous...
         let selectedSaints = this.state.selectedSaints;
         let value = +event.target.value;
+        console.log(event.target);
         let existingIndex = selectedSaints.indexOf(value);
 
         if (event.target.checked && existingIndex === -1) {
@@ -33,7 +37,7 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
         else if (!event.target.checked && existingIndex > -1) {
             selectedSaints.splice(existingIndex, 1);
         }
-
+        console.log('selectedsaints',selectedSaints);
         this.setState({
             ...this.state,
             selectedSaints

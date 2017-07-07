@@ -2,6 +2,7 @@ import * as React from 'react';
 import {connect, DispatchProp, Provider, ProviderProps} from 'react-redux';
 import {BrowserRouter, Route} from 'react-router-dom';
 import AddSaintComponent from './app/saint/add-saint/add-saint.component';
+import BuyerComponent from './app/buyer/buyer.component';
 import {SaintActions} from './app/saint/saint.actions';
 import SaintChooserComponent from './app/saint/saint-chooser/saint-chooser.component';
 
@@ -16,8 +17,9 @@ class Application extends React.Component<ProviderProps & DispatchProp<any>, {}>
             <Provider store={ this.props.store }>
                 <BrowserRouter>
                     <switch>
-                        <Route exact path="/" component={SaintChooserComponent} />
-                        <Route path="/add" component={AddSaintComponent} />
+                        <Route exact path="/" component={SaintChooserComponent as any} />
+                        <Route path="/add" component={AddSaintComponent as any} />
+                        <Route path="/buy" component={BuyerComponent as any} />
                     </switch>
                 </BrowserRouter>
             </Provider>
