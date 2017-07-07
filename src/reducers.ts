@@ -8,6 +8,6 @@ export let reducers: CoffeeSaintsReducers = {
 };
 
 export interface CoffeeSaintsReducers extends ReducersMapObject {
-    saintReducer: Reducer<any>;
-    buyerReducer: Reducer<any>;
+    saintReducer: any;
+    buyerReducer: any;
 }
