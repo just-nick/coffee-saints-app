@@ -1,5 +1,6 @@
 import {BuyerActions} from './buyer.actions';
 import {BuyerStore} from './buyer.store';
+import {ApiRequestAction} from "../common/api-request.action";
 
 let initialState: BuyerStore = {
     buyer: null,
@@ -8,7 +9,7 @@ let initialState: BuyerStore = {
     loading: true
 };
 
-export function buyerReducer(state: BuyerStore = initialState, action: ApiRequestAction) {
+export function buyerReducer(state: BuyerStore = initialState, action: ApiRequestAction): BuyerStore {
     switch (action.type) {
         case BuyerActions.FIND_BUYER:
             return {
