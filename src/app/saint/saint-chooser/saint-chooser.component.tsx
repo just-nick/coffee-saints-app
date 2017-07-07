@@ -27,7 +27,6 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
         // This is seriously outrageous...
         let selectedSaints = this.state.selectedSaints;
         let value = +event.target.value;
-        console.log(event.target);
         let existingIndex = selectedSaints.indexOf(value);
 
         if (event.target.checked && existingIndex === -1) {
@@ -36,7 +35,6 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
         else if (!event.target.checked && existingIndex > -1) {
             selectedSaints.splice(existingIndex, 1);
         }
-        console.log('selectedsaints',selectedSaints);
         this.setState({
             ...this.state,
             selectedSaints
@@ -70,7 +68,7 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
         return (
             <li key={index}>
                 <input name="saintSelect" ref="saintSelect" id={'saint' + saint.id} type="checkbox" value={saint.id} onChange={(e) => {this.toggleSaint(e)}}/>
-                <label htmlFor={'saint' + index}>{saint.name}</label>
+                <label htmlFor={'saint' + saint.id}>{saint.name}</label>
                 <div className="thumb"><img src=""/></div>
             </li>
         );
