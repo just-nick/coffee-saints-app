@@ -2,39 +2,51 @@ import {BuyerActions} from './buyer.actions';
 import {BuyerStore} from './buyer.store';
 
 let initialState: BuyerStore = {
-    buyer: {
-        saint: null,
-        discover: false,
-        loading: true
-    }
+    buyer: null,
+    consumerIds: [],
+    discover: false,
+    loading: true
 };
 
 export function buyerReducer(state: BuyerStore = initialState, action: ApiRequestAction) {
     switch (action.type) {
         case BuyerActions.FIND_BUYER:
-            console.log('FIND_BUYER', state.buyer.saint);
             return {
                 ...state,
-                buyer: {
-                    discover: true,
-                    loading: true
-                }
+                discover: true,
+                loading: true,
+                consumerIds: action.meta.saintIds
             };
 
         case BuyerActions.FIND_BUYER_SUCCESS:
-            console.log('FIND_BUYER_SUCCESS payload', action.payload);
-            // console.log('FIND_BUYER_SUCCESS state', state.buyer);
             return {
                 ...state,
-                buyer: {
-                    saint: action.payload,
-                    discover: true,
-                    loading: false
-                }
+                buyer: action.payload,
+                discover: true,
+                loading: false
             };
 
         case BuyerActions.FIND_BUYER_FAILURE:
-            console.log('FIND_BUYER_FAILURE', state.buyer.saint);
+            console.error('FIND_BUYER_FAILURE', action);
+            return state;
+
+
+        case BuyerActions.BUY:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case BuyerActions.BUY_SUCCESS:
+            return {
+                ...state,
+                buyer: action.payload,
+                discover: false,
+                loading: false
+            };
+
+        case BuyerActions.BUY_FAILURE:
+            console.error('BUY_FAILURE', action);
             return state;
 
         default:

@@ -1,9 +1,8 @@
 import {Saint} from "../saint/saint";
 
 export interface BuyerStore {
-    buyer: {
-        saint: Saint,
-        discover: boolean,
-        loading: boolean
-    }
+    buyer: Saint,
+    consumerIds: number[],
+    discover: boolean,
+    loading: boolean
 }

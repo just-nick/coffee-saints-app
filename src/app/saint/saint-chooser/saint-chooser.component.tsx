@@ -19,9 +19,8 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
 
     public whoBuys(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const response = this.props.dispatch(BuyerActions.find(this.state.selectedSaints));
-        console.log('whoBuys response: ', response);
-        this.props.history.push('/buy');
+        this.props.dispatch(BuyerActions.find(this.state.selectedSaints))
+            .then(() => this.props.history.push('/buy'));
     }
 
     public toggleSaint(event: React.ChangeEvent<HTMLInputElement>) {

@@ -1,5 +1,6 @@
 interface ApiRequestAction {
-    type: string;
+    type: string | Symbol;
     payload: any;
     error: boolean;
+    meta: any;
 }

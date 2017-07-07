@@ -33,6 +33,7 @@ export function saintReducer(state: SaintStore = initialState, action: ApiReques
             };
 
         case SaintActions.ADD_SAINT_FAILURE:
+            console.error(action);
             return state;
 
 
@@ -56,6 +57,7 @@ export function saintReducer(state: SaintStore = initialState, action: ApiReques
             };
 
         case SaintActions.FIND_SAINT_FAILURE:
+            console.error(action);
             return state;
 
         default:
