@@ -7,6 +7,7 @@ module.exports = {
     ],
     devtool: 'eval-source-map',
     output: {
+        path: __dirname + '/dist',
         publicPath: '/',
         filename: 'bundle.js'
     },
@@ -21,7 +22,6 @@ module.exports = {
         }]
     },
     devServer: {
-        contentBase: "./mock-api",
         port: 4200,
         // enable HMR
         //hot: true,
