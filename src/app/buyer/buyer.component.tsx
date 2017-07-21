@@ -17,7 +17,7 @@ export class BuyerComponent extends React.Component<BuyerComponentProps, BuyComp
     }
 
     public render() {
-        let buyer = this.props.buyer.buyer;
+        let buyer = this.props.buyer;
         let buyerLoading = this.props.buyer.loading;
         let onBuyClick = () => this.props
             .dispatch(BuyerActions.buy(this.props.buyer.buyer.id, this.props.buyer.consumerIds))
