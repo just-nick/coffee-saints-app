@@ -5,7 +5,7 @@
   "main": "./src/index.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.js --progress --profile --colors",
+    "build": "webpack --config webpack.config.js --progress --profile --colors && copyfiles _redirects dist",
     "start": "webpack-dev-server --progress --profile --colors"
   },
   "repository": {
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/motome-auto/coffee-saints-app#readme",
   "dependencies": {
+    "copyfiles": "^1.2.0",
     "react": "15.5.4",
     "react-dom": "^15.5.4",
     "react-hot-loader": "^1.3.1",
