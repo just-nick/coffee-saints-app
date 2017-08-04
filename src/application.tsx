@@ -14,15 +14,21 @@ class Application extends React.Component<ProviderProps & DispatchProp<any>, {}>
 
     render() {
         return (
-            <Provider store={ this.props.store }>
-                <BrowserRouter>
-                    <switch>
-                        <Route exact path="/" component={SaintChooserComponent as any} />
-                        <Route path="/add" component={AddSaintComponent as any} />
-                        <Route path="/buy" component={BuyerComponent as any} />
-                    </switch>
-                </BrowserRouter>
-            </Provider>
+            <div className="coffee-saints">
+                <header>Coffee Saints</header>
+                <div className="body">
+                    <Provider store={this.props.store}>
+                        <BrowserRouter>
+                            <switch>
+                                <Route exact path="/" component={SaintChooserComponent as any}/>
+                                <Route path="/add" component={AddSaintComponent as any}/>
+                                <Route path="/buy" component={BuyerComponent as any}/>
+                            </switch>
+                        </BrowserRouter>
+                    </Provider>
+                </div>
+                <footer></footer>
+            </div>
         );
     }
 }

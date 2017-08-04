@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: [
@@ -52,6 +53,10 @@ module.exports = {
         }
     },
     plugins: [
+        new CopyWebpackPlugin([
+            {from: 'src/assets', to: 'assets'},
+            {from: '_redirects', to: '_redirects'}
+        ]),
         new HtmlWebpackPlugin({
             template: './src/index.html',
             files: {

@@ -45,9 +45,9 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
         let saints = this.props.saints.saintsList.saints;
         let saintsLoading = this.props.saints.saintsList.loading;
 
-        return (<form onSubmit={(e) => (this.whoBuys(e))}>
+        return (<form className="saint-chooser" onSubmit={(e) => (this.whoBuys(e))}>
             <h1>Choose your Saint</h1>
-            <Link to="/add">Add a saint</Link>
+            <Link className="add action" to="/add">Add a saint</Link>
             {this.saintList(saints, saintsLoading)}
             <button type="submit">Who Buys?</button>
         </form>);
@@ -58,7 +58,7 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
             return (<div className="loading">Loading...</div>);
         }
         else {
-            return (<ul>{saints.map((saint, index) => {
+            return (<ul className="saint-list">{saints.map((saint, index) => {
                 return this.saintItem(saint, index);
             })}</ul>);
         }
@@ -68,8 +68,10 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
         return (
             <li key={index}>
                 <input name="saintSelect" ref="saintSelect" id={'saint' + saint.id} type="checkbox" value={saint.id} onChange={(e) => {this.toggleSaint(e)}}/>
-                <label htmlFor={'saint' + saint.id}>{saint.name}</label>
-                <div className="thumb"><img src=""/></div>
+                <label htmlFor={'saint' + saint.id}>
+                    <div className="name">{saint.name}</div>
+                    <div className="thumb"><img className="default" src="/assets/beansus.svg"/></div>
+                </label>
             </li>
         );
     }

@@ -29,9 +29,13 @@ class AddSaintComponent extends React.Component<AddSaintComponentProps, AddSaint
 
     public render() {
         return (
-            <div>
+            <div className="add-saint">
+                <h1>Add a saint</h1>
                 <form onSubmit={(e) => this.onSubmit(e)}>
-                    <input autoFocus={true} value={this.state.name} onChange={(e) => this.onSaintChange(e)}/>
+                    <div className="field">
+                        <label htmlFor="saintName">Name</label>
+                        <input id="saintName" autoFocus={true} value={this.state.name} onChange={(e) => this.onSaintChange(e)}/>
+                    </div>
                     <button type="submit">Add</button>
                 </form>
             </div>
