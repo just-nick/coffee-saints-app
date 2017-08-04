@@ -1,0 +1,21 @@
+%navbar {
+    position: relative;
+    background: color('main');
+    color: color(main, inverse);
+    padding: 0.5rem 0.5rem 0.5rem 2.5rem;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    height: 1.5rem;
+    font-weight: 800;
+
+    &::before {
+        position: absolute;
+        top: 0.5rem;
+        left: 0.75rem;
+        background: url('../assets/beansus.svg') no-repeat;
+        background-size: contain;
+        height: 1.5rem;
+        width: 1.5rem;
+        content: '';
+    }
+}
