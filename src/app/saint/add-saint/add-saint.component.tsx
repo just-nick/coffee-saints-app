@@ -38,7 +38,7 @@ class AddSaintComponent extends React.Component<AddSaintComponentProps, AddSaint
         )
     }
 }
-export default connect(() => {})(AddSaintComponent as any);
+export default connect(() => ({}))(AddSaintComponent as any);
 
 interface AddSaintComponentState {
     name: string;

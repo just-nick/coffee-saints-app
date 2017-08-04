@@ -34,7 +34,7 @@ export class BuyerComponent extends React.Component<BuyerComponentProps, BuyComp
             return (<div className="loading">Loading...</div>);
         }
         else {
-            return (<ul>{saints.map((saint, index) => {
+            return (<ul className="saint-list">{saints.map((saint, index) => {
                 return this.saintItem(saint, index);
             })}</ul>);
         }
