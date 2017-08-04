@@ -1,0 +1,56 @@
+%saint-list {
+    display: block;
+    padding: 0;
+    margin: 0.5rem 0;
+    li {
+        @extend %saint-list-item;
+        margin: 0.2rem 0;
+    }
+}
+
+%saint-list-item {
+    $thumb-size: 4rem;
+    $label-padding: 0.5rem;
+    display: flex;
+    align-items: center;
+
+    input {
+        display: none;
+    }
+
+    label {
+        transition: background-color 300ms, color 300ms;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        display: block;
+        background: color('subtle');
+        color: color('subtle', 'inverse');
+        padding: $label-padding $label-padding $label-padding ($thumb-size/2 + $label-padding);
+        order: 1;
+        flex: 1 1 auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: 600;
+        border-radius: 0.5rem;
+    }
+
+    .thumb {
+        position: relative;
+        display: block;
+        height: $thumb-size;
+        width: $thumb-size;
+        margin-right: -$thumb-size/2;
+        border-radius: 50%;
+        background: color('main');
+        order: 0;
+        flex: 0 0 auto;
+    }
+
+    input:checked {
+        ~ label {
+            background: color('main', 'alt');
+            color: color('main', 'inverse');
+        }
+    }
+}
