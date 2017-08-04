@@ -5,7 +5,7 @@
   "main": "./src/index.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack.config.js --progress --profile --colors",
+    "build": "webpack --config webpack.config.js --progress --profile --colors && copyfiles _redirects dist",
     "start": "webpack-dev-server --progress --profile --colors"
   },
   "repository": {

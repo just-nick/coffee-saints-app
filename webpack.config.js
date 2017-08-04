@@ -54,8 +54,7 @@ module.exports = {
     },
     plugins: [
         new CopyWebpackPlugin([
-            {from: 'src/assets', to: 'assets'},
-            {from: '_redirects', to: '_redirects'}
+            {from: 'src/assets', to: 'assets'}
         ]),
         new HtmlWebpackPlugin({
             template: './src/index.html',
