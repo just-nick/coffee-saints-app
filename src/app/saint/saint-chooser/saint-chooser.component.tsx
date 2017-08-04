@@ -4,10 +4,7 @@ import {Link} from "react-router-dom";
 import {Saint} from "../saint";
 import {SaintStore} from "../saint.store";
 import {RouteComponentProps} from "react-router";
-import {findDOMNode} from "react-dom";
 import {BuyerActions} from "../../buyer/buyer.actions";
-import {BuyerComponent} from "../../buyer/buyer.component";
-
 
 class SaintChooserComponent extends React.Component<SaintChooserComponentProps, SaintChooserComponentState> {
     constructor(props: SaintChooserComponentProps) {
