@@ -3,10 +3,15 @@ import {connect, DispatchProp} from "react-redux";
 import {RouteComponentProps} from "react-router-dom";
 import {BuyerStore} from "./buyer.store";
 import {BuyerActions} from "./buyer.actions";
+import {SaintStore} from '../saint/saint.store';
+import {Saint} from '../saint/saint';
 
 export class BuyerComponent extends React.Component<BuyerComponentProps, BuyComponentState> {
     constructor(props: BuyerComponentProps) {
         super(props);
+        this.state = {
+            selectedBuyer: -1
+        }
     }
 
     public componentDidMount() {
@@ -15,13 +20,53 @@ export class BuyerComponent extends React.Component<BuyerComponentProps, BuyComp
         }
     }
 
+    public selectSaint(event: React.ChangeEvent<HTMLInputElement>) {
+        let selectedBuyer = +event.target.value;
+        console.log(selectedBuyer);
+        this.setState({
+            ...this.state,
+            selectedBuyer
+        });
+    }
+
+    private alternateSaintList (saints: Saint[], loading: boolean) {
+        if (loading) {
+            return (<div className="loading">Loading...</div>);
+        }
+        else {
+            return (<ul>{saints.map((saint, index) => {
+                return this.saintItem(saint, index);
+            })}</ul>);
+        }
+    }
+
+    private saintItem (saint: Saint, index: number) {
+        return (
+            <li key={index}>
+                <input name="saintSelect" ref="saintSelect" id={'saint' + saint.id} type="radio" value={saint.id} onChange={(e) => {this.selectSaint(e)}}/>
+                <label htmlFor={'saint' + saint.id}>{saint.name}</label>
+                <div className="thumb"><img src=""/></div>
+            </li>
+        );
+    }
+
     public render() {
         let buyer = this.props.buyer.buyer;
+        let loading = this.props.buyer.loading;
+        let saints = this.props.saint.saintsList.saints;
         let buyerLoading = this.props.buyer.loading;
 
         let onBuyClick = () => {
             this.props
                 .dispatch(BuyerActions.buy(this.props.buyer.buyer.id, this.props.buyer.consumerIds))
+                .then(() => {
+                    this.props.history.push('/');
+                });
+        };
+
+        let onAnotherBuyerClick = () => {
+            this.props
+                .dispatch(BuyerActions.buy(this.state.selectedBuyer, this.props.buyer.consumerIds))
                 .then(() => {
                     this.props.history.push('/');
                 });
@@ -33,8 +78,12 @@ export class BuyerComponent extends React.Component<BuyerComponentProps, BuyComp
         else {
             return (
                 <div>
-                    <p>{buyer.name}</p>
-                    <button onClick={onBuyClick} type="button">Buy</button>
+                    <p>It's {buyer.name} turn to buy!</p> <button onClick={onBuyClick} type="button">Confirm?</button>
+
+                    <ul>
+                        {this.alternateSaintList(saints, loading)}
+                    </ul>
+                    <button onClick={onAnotherBuyerClick} type="button">Someone else pays</button>
                 </div>
             )
         }
@@ -42,12 +91,15 @@ export class BuyerComponent extends React.Component<BuyerComponentProps, BuyComp
 }
 
 export default connect((state) => {
-    return {buyer: state.buyerReducer}
+    return {buyer: state.buyerReducer,
+            saint: state.saintReducer}
 })(BuyerComponent as any);
 
 interface BuyerComponentProps extends DispatchProp<any>, RouteComponentProps<any> {
-    buyer: BuyerStore
+    buyer: BuyerStore,
+    saint: SaintStore
 }
 
 interface BuyComponentState {
+    selectedBuyer: number
 }
