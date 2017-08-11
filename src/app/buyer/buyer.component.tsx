@@ -44,8 +44,10 @@ export class BuyerComponent extends React.Component<BuyerComponentProps, BuyComp
         return (
             <li key={index}>
                 <input name="saintSelect" ref="saintSelect" id={'saint' + saint.id} type="radio" value={saint.id} onChange={(e) => {this.selectSaint(e)}}/>
-                <label htmlFor={'saint' + saint.id}>{saint.name}</label>
-                <div className="thumb"><img src=""/></div>
+                <label htmlFor={'saint' + saint.id}>
+                    <div className="name">{saint.name}</div>
+                    <div className="thumb"><img className="default" src="/assets/beansus.svg"/></div>
+                </label>
             </li>
         );
     }
