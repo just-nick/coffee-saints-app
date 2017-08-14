@@ -80,8 +80,10 @@ export class BuyerComponent extends React.Component<BuyerComponentProps, BuyComp
         else {
             return (
                 <div>
-                    <p>It's {buyer.name} turn to buy!</p> <button onClick={onBuyClick} type="button">Confirm?</button>
+                    <h1>It's {buyer.name} turn to buy!</h1>
+                    <button onClick={onBuyClick} type="button">Confirm?</button>
 
+                    <h2>Or, choose someone else</h2>
                     <ul>
                         {this.alternateSaintList(saints, loading)}
                     </ul>

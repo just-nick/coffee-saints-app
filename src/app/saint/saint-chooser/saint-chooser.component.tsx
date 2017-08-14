@@ -43,10 +43,10 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
         let saintsLoading = this.props.saints.saintsList.loading;
 
         return (<form className="saint-chooser" onSubmit={(e) => (this.whoBuys(e))}>
-            <h1>Choose your Saint</h1>
+            <h1>Who is getting a coffee today?</h1>
             <Link className="add action" to="/add">Add a saint</Link>
             {this.saintList(saints, saintsLoading)}
-            <button type="submit">Who Buys?</button>
+            <button type="submit">Find out who buys</button>
         </form>);
     }
 
