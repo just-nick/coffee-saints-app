@@ -84,9 +84,7 @@ export class BuyerComponent extends React.Component<BuyerComponentProps, BuyComp
                     <button onClick={onBuyClick} type="button">Confirm?</button>
 
                     <h2>Or, choose someone else</h2>
-                    <ul>
-                        {this.alternateSaintList(saints, loading)}
-                    </ul>
+                    {this.alternateSaintList(saints, loading)}
                     <button onClick={onAnotherBuyerClick} type="button">Someone else pays</button>
                 </div>
             )
