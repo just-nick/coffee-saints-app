@@ -67,6 +67,7 @@ module.exports = {
             files: {
                 js: [ "bundle.js"]
             }
-        })
+        }),
+        new webpack.optimize.UglifyJsPlugin()
     ]
 }
