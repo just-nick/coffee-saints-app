@@ -53,6 +53,12 @@ module.exports = {
         }
     },
     plugins: [
+        // Should be prod only. Fix builds.
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
         new CopyWebpackPlugin([
             {from: 'src/assets', to: 'assets'}
         ]),
