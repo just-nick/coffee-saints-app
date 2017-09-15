@@ -10,7 +10,8 @@ export class BuyerComponent extends React.Component<BuyerComponentProps, BuyComp
     constructor(props: BuyerComponentProps) {
         super(props);
         this.state = {
-            selectedBuyer: -1
+            selectedBuyer: -1,
+            chooseSomeoneElse: false
         }
     }
 
@@ -22,7 +23,6 @@ export class BuyerComponent extends React.Component<BuyerComponentProps, BuyComp
 
     public selectSaint(event: React.ChangeEvent<HTMLInputElement>) {
         let selectedBuyer = +event.target.value;
-        console.log(selectedBuyer);
         this.setState({
             ...this.state,
             selectedBuyer
@@ -58,6 +58,22 @@ export class BuyerComponent extends React.Component<BuyerComponentProps, BuyComp
         let saints = this.props.saint.saintsList.saints;
         let buyerLoading = this.props.buyer.loading;
 
+        if (buyerLoading) {
+            return (<div className="loading">Loading...</div>);
+        }
+        else {
+            return (
+                <div>
+                    {this.chosenBuyer(buyer.name)}
+                    {this.chooseAnother(saints, loading)}
+                </div>
+            )
+        }
+    }
+
+    public chosenBuyer(buyerName: string) {
+        let show = !this.state.chooseSomeoneElse;
+
         let onBuyClick = () => {
             this.props
                 .dispatch(BuyerActions.buy(this.props.buyer.buyer.id, this.props.buyer.consumerIds))
@@ -66,6 +82,27 @@ export class BuyerComponent extends React.Component<BuyerComponentProps, BuyComp
                 });
         };
 
+        if(show) {
+            return (
+                <div>
+                    <h1>It's {buyerName} turn to buy!</h1>
+                    <button onClick={onBuyClick} type="button">Confirm?</button>
+                    <br/>
+                    <button onClick={() => {
+                        this.setState({
+                            ...this.state,
+                            chooseSomeoneElse: true
+                        });
+                    }} type="button">Choose someone else
+                    </button>
+                </div>
+            )
+        }
+        return null;
+    }
+
+    public chooseAnother(saints: Saint[], loading: boolean) {
+        let show = this.state.chooseSomeoneElse;
         let onAnotherBuyerClick = () => {
             this.props
                 .dispatch(BuyerActions.buy(this.state.selectedBuyer, this.props.buyer.consumerIds))
@@ -74,21 +111,18 @@ export class BuyerComponent extends React.Component<BuyerComponentProps, BuyComp
                 });
         };
 
-        if (buyerLoading) {
-            return (<div className="loading">Loading...</div>);
-        }
-        else {
+        if(show) {
             return (
                 <div>
-                    <h1>It's {buyer.name} turn to buy!</h1>
-                    <button onClick={onBuyClick} type="button">Confirm?</button>
-
-                    <h2>Or, choose someone else</h2>
-                    {this.alternateSaintList(saints, loading)}
+                    <h1>Choose who will pay for the Coffees</h1>
+                    <ul>
+                        {this.alternateSaintList(saints, loading)}
+                    </ul>
                     <button onClick={onAnotherBuyerClick} type="button">Someone else pays</button>
                 </div>
             )
         }
+        return null;
     }
 }
 
@@ -103,5 +137,6 @@ interface BuyerComponentProps extends DispatchProp<any>, RouteComponentProps<any
 }
 
 interface BuyComponentState {
-    selectedBuyer: number
+    selectedBuyer: number,
+    chooseSomeoneElse: boolean
 }

@@ -16,7 +16,8 @@ class AddSaintComponent extends React.Component<AddSaintComponentProps, AddSaint
         e.preventDefault();
         let newSaint: Saint = {
             name: this.state.name,
-            coffee: 0
+            coffeeBought: 0,
+            coffeeConsumed: 0
         };
 
         this.props.dispatch(SaintActions.add(newSaint));

@@ -5,13 +5,16 @@ import {Saint} from "../saint";
 import {SaintStore} from "../saint.store";
 import {RouteComponentProps} from "react-router";
 import {BuyerActions} from "../../buyer/buyer.actions";
+import {SaintActions} from '../saint.actions';
 
 class SaintChooserComponent extends React.Component<SaintChooserComponentProps, SaintChooserComponentState> {
     constructor(props: SaintChooserComponentProps) {
         super(props);
         this.state = {
             selectedSaints: []
-        }
+        };
+
+        this.props.dispatch(SaintActions.find());
     }
 
     public whoBuys(e: React.FormEvent<HTMLFormElement>) {
@@ -66,7 +69,17 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
             <li key={index}>
                 <input name="saintSelect" ref="saintSelect" id={'saint' + saint.id} type="checkbox" value={saint.id} onChange={(e) => {this.toggleSaint(e)}}/>
                 <label htmlFor={'saint' + saint.id}>
-                    <div className="name">{saint.name}</div>
+                    <div className="name">
+                        {saint.name}
+                        <div className="bought">
+                            <span>Bought:</span>
+                            {saint.coffeeBought}
+                        </div>
+                        <div className="consumed">
+                            <span>Consumed:</span>
+                            {saint.coffeeConsumed}
+                        </div>
+                    </div>
                     <div className="thumb"><img className="default" src="/assets/beansus.svg"/></div>
                 </label>
             </li>

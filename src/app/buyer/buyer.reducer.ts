@@ -20,7 +20,6 @@ export function buyerReducer(state: BuyerStore = initialState, action: ApiReques
             };
 
         case BuyerActions.FIND_BUYER_SUCCESS:
-            console.log('Found buyer', action);
             return {
                 ...state,
                 buyer: action.payload,
@@ -34,14 +33,12 @@ export function buyerReducer(state: BuyerStore = initialState, action: ApiReques
 
 
         case BuyerActions.BUY:
-            console.log('Buy', state, action);
             return {
                 ...state,
                 loading: true
             };
 
         case BuyerActions.BUY_SUCCESS:
-            console.log('Buy-success', state, action);
             return {
                 ...state,
                 buyer: action.payload,

@@ -41,6 +41,39 @@
             text-overflow: ellipsis;
             font-weight: 600;
             border-radius: 0.5rem;
+
+            div {
+                float: right;
+                font-weight: normal;
+                padding-left: 5px;
+
+                span {
+                    display: inline-block;
+                    overflow: hidden;
+                    vertical-align: middle;
+                    text-indent: -9999px;
+                    position: relative;
+                    width: 1rem;
+                    height: 1rem;
+                    padding-left: 5px;
+
+                    &::after {
+                        @extend %icon;
+                        position: absolute;
+                        content: $icon-bought;
+                        text-indent: 0;
+                        top: 0;
+                        left: 0;
+                    }
+                }
+
+
+                &.consumed span {
+                    &::after {
+                        content: $icon-consumed;
+                    }
+                }
+            }
         }
 
         .thumb {
