@@ -1,17 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,800');
-
 @import './base/colours';
 @import './base/type';
 @import './base/icons';
 @import './base/forms';
-
 @import './components/button';
 @import './components/action.scss';
 @import './components/loading-icon';
 @import './components/navbar';
 @import './components/footer';
 @import './components/saint-list';
-
 @import '../app/saint/saint-chooser/saint-chooser';
 
 body {
@@ -43,6 +40,11 @@ button, input, p, select {
 
     header {
         @extend %navbar;
+
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
     }
 
     footer {
