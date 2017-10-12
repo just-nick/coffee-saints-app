@@ -20,10 +20,10 @@ export namespace SaintActions {
         );
     }
 
-    export function find() {
+    export function find(coffeeGroupId: string) {
         return ApiRequestFactory.get(
             [FIND_SAINT, FIND_SAINT_SUCCESS, FIND_SAINT_FAILURE],
-            '/api/saints'
+            '/api/coffee-groups/' + coffeeGroupId + '/saints'
         )
     }
 }

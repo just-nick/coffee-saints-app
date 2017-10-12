@@ -38,7 +38,7 @@ class CoffeeGroupListComponent extends React.Component<CoffeeGroupListComponentP
     private generateCoffeeGroupItem(coffeeGroup: CoffeeGroup, index: number) {
         return (
             <li key={index}>
-                <Link to={"/saints"}>
+                <Link to={"/groups/" + coffeeGroup.id}>
                     {coffeeGroup.name}
                 </Link>
             </li>

@@ -14,7 +14,7 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
             selectedSaints: []
         };
 
-        this.props.dispatch(SaintActions.find());
+        this.props.dispatch(SaintActions.find(this.props.match.params.coffeeGroupId));
     }
 
     public whoBuys(e: React.FormEvent<HTMLFormElement>) {
@@ -53,7 +53,7 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
         </form>);
     }
 
-    private saintList (saints: Saint[], loading: boolean) {
+    private saintList(saints: Saint[], loading: boolean) {
         if (loading) {
             return (<div className="loading">Loading...</div>);
         }
@@ -64,10 +64,13 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
         }
     }
 
-    private saintItem (saint: Saint, index: number) {
+    private saintItem(saint: Saint, index: number) {
         return (
             <li key={index}>
-                <input name="saintSelect" ref="saintSelect" id={'saint' + saint.id} type="checkbox" value={saint.id} onChange={(e) => {this.toggleSaint(e)}}/>
+                <input name="saintSelect" ref="saintSelect" id={'saint' + saint.id} type="checkbox" value={saint.id}
+                       onChange={(e) => {
+                           this.toggleSaint(e)
+                       }}/>
                 <label htmlFor={'saint' + saint.id}>
                     <div className="name">
                         {saint.name}
