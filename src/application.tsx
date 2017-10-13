@@ -28,7 +28,7 @@ class Application extends React.Component<ProviderProps & DispatchProp<any>, {}>
                                 <Route exact path="/" component={CoffeeGroupListComponent as any}/>
                                 <Route exact path="/groups/:coffeeGroupId" component={SaintChooserComponent as any}/>
                                 <Route exact path="/groups/:coffeeGroupId/add-saint" component={AddSaintComponent as any}/>
-                                <Route path="/buy" component={BuyerComponent as any}/>
+                                <Route exact path="/groups/:coffeeGroupId/who-buys" component={BuyerComponent as any}/>
                             </switch>
                         </Provider>
                     </div>
