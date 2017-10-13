@@ -27,7 +27,7 @@ export namespace ApiRequestFactory {
 
     export function post(types: Array<string | Object | Symbol>, endpoint: string, body?: Object) {
         let bodyContent = bodyTest(body);
-
+        console.log(bodyContent,endpoint);
         return <any> {
             [CALL_API]: {
                 types,
