@@ -51,10 +51,18 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
         let addSaintPath = '/groups/' + this.props.match.params.coffeeGroupId + '/add-saint';
 
         return (<form className="saint-chooser" onSubmit={(e) => (this.whoBuys(e))}>
-            <h1>Who is getting a coffee today?</h1>
-            <Link className="add action" to={addSaintPath}>Add a saint</Link>
+            <h1>
+                Who is getting a coffee today?
+            </h1>
+            <Link className="add action" to={addSaintPath}>
+                Add a saint
+            </Link>
+
             {this.saintList(saints, saintsLoading)}
-            <button type="submit">Find out who buys</button>
+
+            <button type="submit" disabled={this.selectedSaintsCount() < 2}>
+                Find out who buys
+            </button>
         </form>);
     }
 
@@ -92,6 +100,10 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
                 </label>
             </li>
         );
+    }
+
+    private selectedSaintsCount() {
+        return this.state.selectedSaints.length;
     }
 }
 

@@ -10,4 +10,9 @@
         top: 0;
         right: 0;
     }
+
+    button:disabled {
+        background: #CCC;
+        cursor: not-allowed;
+    }
 }
