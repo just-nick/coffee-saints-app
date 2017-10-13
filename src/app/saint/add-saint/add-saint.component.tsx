@@ -20,8 +20,8 @@ class AddSaintComponent extends React.Component<AddSaintComponentProps, AddSaint
             coffeeConsumed: 0
         };
 
-        this.props.dispatch(SaintActions.add(newSaint));
-        this.props.history.push('/');
+        this.props.dispatch(SaintActions.add(this.props.match.params.coffeeGroupId, newSaint));
+        this.props.history.push('/groups/' + this.props.match.params.coffeeGroupId);
     }
 
     private onSaintChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -35,7 +35,8 @@ class AddSaintComponent extends React.Component<AddSaintComponentProps, AddSaint
                 <form onSubmit={(e) => this.onSubmit(e)}>
                     <div className="field">
                         <label htmlFor="saintName">Name</label>
-                        <input id="saintName" autoFocus={true} value={this.state.name} onChange={(e) => this.onSaintChange(e)}/>
+                        <input id="saintName" autoFocus={true} value={this.state.name}
+                               onChange={(e) => this.onSaintChange(e)}/>
                     </div>
                     <button type="submit">Add</button>
                 </form>
@@ -43,10 +44,12 @@ class AddSaintComponent extends React.Component<AddSaintComponentProps, AddSaint
         )
     }
 }
+
 export default connect(() => ({}))(AddSaintComponent as any);
 
 interface AddSaintComponentState {
     name: string;
 }
 
-interface AddSaintComponentProps extends DispatchProp<any>, RouteComponentProps<any> {}
+interface AddSaintComponentProps extends DispatchProp<any>, RouteComponentProps<any> {
+}

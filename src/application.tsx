@@ -24,14 +24,12 @@ class Application extends React.Component<ProviderProps & DispatchProp<any>, {}>
                     </header>
                     <div className="body">
                         <Provider store={this.props.store}>
-
                             <switch>
                                 <Route exact path="/" component={CoffeeGroupListComponent as any}/>
-                                <Route path="/groups/:coffeeGroupId" component={SaintChooserComponent as any}/>
-                                <Route path="/add" component={AddSaintComponent as any}/>
+                                <Route exact path="/groups/:coffeeGroupId" component={SaintChooserComponent as any}/>
+                                <Route exact path="/groups/:coffeeGroupId/add-saint" component={AddSaintComponent as any}/>
                                 <Route path="/buy" component={BuyerComponent as any}/>
                             </switch>
-
                         </Provider>
                     </div>
                     <footer></footer>
