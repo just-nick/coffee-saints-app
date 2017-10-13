@@ -1,5 +1,6 @@
 %navbar {
-    position: relative;
+    position: fixed;
+    width: 100%;
     background: color('main');
     color: color(main, inverse);
     padding: 0.5rem 0.5rem 0.5rem 2.5rem;
@@ -7,6 +8,7 @@
     line-height: 1.5rem;
     height: 1.5rem;
     font-weight: 800;
+    z-index: 999;
 
     &::before {
         position: absolute;
