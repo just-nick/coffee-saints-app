@@ -3,6 +3,7 @@ import {connect, DispatchProp} from 'react-redux';
 import {RouteComponentProps} from "react-router-dom";
 import {CoffeeGroup} from './coffee-group';
 import {CoffeeGroupActions} from './coffe-group.actions';
+import {CoffeeGroupStore} from './coffee-group.store';
 
 class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, CoffeeGroupComponentState> {
     constructor(props: CoffeeGroupComponentProps) {
@@ -10,8 +11,9 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
         this.state = {
             name: '',
             description: '',
-            coffeeGroupsList:[]
-        }
+            // coffeeGroups: []
+        };
+        this.props.dispatch(CoffeeGroupActions.get());
     }
 
     private onSubmit(e: React.FormEvent<any>) {
@@ -19,8 +21,7 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
         let newGroup: CoffeeGroup = {
             name: this.state.name,
             description: this.state.description
-        }
-        console.log(newGroup.name, newGroup.description);
+        };
 
         this.props.dispatch(CoffeeGroupActions.add(newGroup));
         this.props.history.push('/');
@@ -35,12 +36,9 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
         this.setState({description: e.target.value});
     }
 
-    private onGroupsListClick(){
-        this.props.dispatch(CoffeeGroupActions.get());
-        this.props.history.push('groups-list');
-    }
-
     public render() {
+        let coffeeGroups = this.props.coffeeGroups.coffeeGroupsList.coffeeGroups;
+        let coffeeGroupsLoading =this.props.coffeeGroups.coffeeGroupsList.loading;
         return (
             <div>
                 <div className="add-group">
@@ -59,21 +57,61 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
                         <button type="submit">Add</button>
                     </form>
                 </div>
-                <div className ='groups-list'>
-                    <div><button onClick={this.onGroupsListClick}>Coffee Groups List</button></div>
+                <div className='groups-list'>
+                    <div>
+                        <label> Please select a group: </label>
+                    </div>
+                    {this.coffeeGroupList(coffeeGroups, coffeeGroupsLoading)}
                 </div>
             </div>
         )
     }
+
+    private coffeeGroupList (coffeeGroups: CoffeeGroup[], loading: boolean) {
+        console.log("coffeegroups" , coffeeGroups);
+        if (loading) {
+            return (<div className="loading">Loading...</div>);
+        }
+        else {
+            return (<ul className="coffee-group-list">{coffeeGroups.map((coffeeGroup, index) => {
+                return CoffeeGroupComponent.coffeeGroupItem(coffeeGroup, index);
+            })}</ul>);
+        }
+    }
+
+    private static coffeeGroupItem(coffeeGroup: CoffeeGroup, index: number) {
+        return (
+            <li key={index}>
+                {/*<input name="coffeeGroupSelect" ref="coffeeGroupSelect" id={'coffeeGroup' + coffeeGroup.id} type="checkbox" value={coffeeGroup.id}/>*/}
+                <label htmlFor={'coffeeGroup' + coffeeGroup.id}>
+                    <div className="name">
+                        {coffeeGroup.name}
+                    </div>
+                    <div className="Description">
+                        {coffeeGroup.description}
+                    </div>
+                </label>
+            </li>
+        );
+    }
 }
 
-export default connect(() => ({}))(CoffeeGroupComponent as any);
+
+export default connect(
+    (stateProvider) => {
+            return {
+                coffeeGroups: stateProvider.coffeeGroupReducer
+            }
+        }
+)(CoffeeGroupComponent);
+
+
+interface CoffeeGroupComponentProps extends DispatchProp<any>, RouteComponentProps<any> {
+    coffeeGroups: CoffeeGroupStore;
+}
 
 interface CoffeeGroupComponentState {
     name: string;
     description: string;
-    coffeeGroupsList : CoffeeGroup[];
-}
-
-interface CoffeeGroupComponentProps extends DispatchProp<any>, RouteComponentProps<any> {
+    // coffeeGroups: CoffeeGroup[];
 }

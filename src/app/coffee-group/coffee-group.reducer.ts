@@ -1,11 +1,6 @@
 import {CoffeeGroupActions} from './coffe-group.actions';
-import ADD_GROUP = CoffeeGroupActions.ADD_GROUP;
-import ADD_GROUP_SUCCESS = CoffeeGroupActions.ADD_GROUP_SUCCESS;
-import ADD_GROUP_FAILURE = CoffeeGroupActions.ADD_GROUP_FAILURE;
 import {CoffeeGroupStore} from './coffee-group.store';
 import {ApiRequestAction} from '../common/api-request.action';
-import FIND_GROUPS = CoffeeGroupActions.FIND_GROUPS;
-import FIND_GROUPS_SUCCESS = CoffeeGroupActions.FIND_GROUPS_SUCCESS;
 
 let initialState : CoffeeGroupStore ={
     coffeeGroupsList: {
@@ -16,7 +11,7 @@ let initialState : CoffeeGroupStore ={
 
 export function coffeeGroupReducer(state:CoffeeGroupStore = initialState, action:ApiRequestAction): CoffeeGroupStore{
     switch (action.type){
-        case ADD_GROUP:
+        case CoffeeGroupActions.ADD_GROUP:
             return {
                 ...state,
                 coffeeGroupsList:{
@@ -25,24 +20,23 @@ export function coffeeGroupReducer(state:CoffeeGroupStore = initialState, action
                 }
             };
 
-        case ADD_GROUP_SUCCESS:
+        case CoffeeGroupActions.ADD_GROUP_SUCCESS:
             return {
                 ...state,
                 coffeeGroupsList:{
                     ...state.coffeeGroupsList,
-                    coffeeGroups:{
-                        ...state.coffeeGroupsList.coffeeGroups
-                    },
+                    coffeeGroups:[
+                        ...state.coffeeGroupsList.coffeeGroups,
+                        action.payload
+                    ],
                     loading:false
                 }
             };
 
-        case ADD_GROUP_FAILURE:
-            console.log('ADD GROUP FAILED...');
+        case CoffeeGroupActions.ADD_GROUP_FAILURE:
             return state;
 
-        case FIND_GROUPS:
-            console.log('find groups');
+        case CoffeeGroupActions.FIND_GROUPS:
             return {
                 ...state,
                 coffeeGroupsList:{
@@ -51,16 +45,11 @@ export function coffeeGroupReducer(state:CoffeeGroupStore = initialState, action
                 }
             };
 
-        case FIND_GROUPS_SUCCESS:
-            console.log(...state.coffeeGroupsList.coffeeGroups);
+        case CoffeeGroupActions.FIND_GROUPS_SUCCESS:
             return{
                 ...state,
                 coffeeGroupsList:{
-                    ...state.coffeeGroupsList,
-                    coffeeGroups:{
-                        ...state.coffeeGroupsList.coffeeGroups,
-
-                    },
+                    coffeeGroups:action.payload,
                     loading:false
                 }
             };
