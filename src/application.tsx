@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {connect, DispatchProp, Provider, ProviderProps} from 'react-redux';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Link, Route} from 'react-router-dom';
 import AddSaintComponent from './app/saint/add-saint/add-saint.component';
 import BuyerComponent from './app/buyer/buyer.component';
 import SaintChooserComponent from './app/saint/saint-chooser/saint-chooser.component';
@@ -14,24 +14,26 @@ class Application extends React.Component<ProviderProps & DispatchProp<any>, {}>
 
     render() {
         return (
-            <div className="coffee-saints">
-                <header>Coffee Saints</header>
-                <div className="body">
-                    <Provider store={this.props.store}>
-                        <BrowserRouter>
+            <BrowserRouter>
+                <div className="coffee-saints">
+                    <header>
+                        <Link to={"/"}>
+                            Coffee Saints
+                        </Link>
+                    </header>
+                    <div className="body">
+                        <Provider store={this.props.store}>
                             <switch>
-                                <Route path="/saints" component={SaintChooserComponent as any}/>
-                                <Route path="/add" component={AddSaintComponent as any}/>
-                                <Route path="/buy" component={BuyerComponent as any}/>
                                 <Route exact path="/" component={CoffeeGroupComponent as any}/>
+                                <Route exact path="/groups/:coffeeGroupId" component={SaintChooserComponent as any}/>
+                                <Route exact path="/groups/:coffeeGroupId/add-saint" component={AddSaintComponent as any}/>
+                                <Route exact path="/groups/:coffeeGroupId/who-buys" component={BuyerComponent as any}/>
                             </switch>
-                        </BrowserRouter>
                     </Provider>
                 </div>
-                <footer>
-
-                </footer>
+                <footer></footer>
             </div>
+            </BrowserRouter>
         );
     }
 }

@@ -9,20 +9,20 @@ export namespace BuyerActions {
     export const BUY_SUCCESS = Symbol('BUY_SUCCESS');
     export const BUY_FAILURE = Symbol('BUY_FAILURE');
 
-    export function find(saintIds: number[]) {
+    export function find(coffeeGroupId: string, saintIds: number[]) {
         return ApiRequestFactory.get(
             [{
                 type: FIND_BUYER,
                 meta: {saintIds}
             }, FIND_BUYER_SUCCESS, FIND_BUYER_FAILURE],
-            '/api/saints/buying?saintIds=' + saintIds.join(',')
+            '/api/coffee-groups/' + coffeeGroupId + '/saints/buying?saintIds=' + saintIds.join(',')
         )
     }
 
-    export function buy(buyerId: number, saintIds: number[]) {
+    export function buy(coffeeGroupId: string, buyerId: number, saintIds: number[]) {
         return ApiRequestFactory.post(
             [BUY, BUY_SUCCESS, BUY_FAILURE],
-            '/api/saints/' + buyerId + '/buying',
+            '/api/coffee-groups/' + coffeeGroupId + '/saints/' + buyerId + '/buying',
             saintIds
         );
     }

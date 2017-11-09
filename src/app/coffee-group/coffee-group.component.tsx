@@ -2,9 +2,9 @@ import * as React from 'react';
 import {connect, DispatchProp} from 'react-redux';
 import {RouteComponentProps} from "react-router-dom";
 import {CoffeeGroup} from './coffee-group';
-import {CoffeeGroupActions} from './coffe-group.actions';
+import {CoffeeGroupActions} from './coffee-group.actions';
 import {CoffeeGroupStore} from './coffee-group.store';
-
+import {Link} from 'react-router-dom';
 class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, CoffeeGroupComponentState> {
     constructor(props: CoffeeGroupComponentProps) {
         super(props);
@@ -84,12 +84,11 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
             <li key={index}>
                 {/*<input name="coffeeGroupSelect" ref="coffeeGroupSelect" id={'coffeeGroup' + coffeeGroup.id} type="checkbox" value={coffeeGroup.id}/>*/}
                 <label htmlFor={'coffeeGroup' + coffeeGroup.id}>
-                    <div className="name">
-                        {coffeeGroup.name}
-                    </div>
-                    <div className="Description">
-                        {coffeeGroup.description}
-                    </div>
+                    <li key={index}>
+                        <Link to={"/groups/" + coffeeGroup.id}>
+                            {coffeeGroup.name} - {coffeeGroup.description}
+                        </Link>
+                    </li>
                 </label>
             </li>
         );

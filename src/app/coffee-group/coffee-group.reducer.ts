@@ -1,4 +1,4 @@
-import {CoffeeGroupActions} from './coffe-group.actions';
+import {CoffeeGroupActions} from './coffee-group.actions';
 import {CoffeeGroupStore} from './coffee-group.store';
 import {ApiRequestAction} from '../common/api-request.action';
 
