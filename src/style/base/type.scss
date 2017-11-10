@@ -1,8 +1,18 @@
 %h1 {
-    font-size: 2rem;
-    color: color(main);
-    margin: 2rem 0 0.5rem;
-}
+     font-size: 2rem;
+     color: color(main);
+     margin: 2rem 0 0.5rem;
+ }
 h1 {
     @extend %h1;
+}
+
+
+%h2 {
+    font-size: 1.5rem;
+    color: color(main);
+    margin: 1.5rem 0 0.5rem;
+}
+h2 {
+    @extend %h2;
 }

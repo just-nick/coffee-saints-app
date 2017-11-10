@@ -39,27 +39,31 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
     public render() {
         let coffeeGroups = this.props.coffeeGroups.coffeeGroupsList.coffeeGroups;
         let coffeeGroupsLoading =this.props.coffeeGroups.coffeeGroupsList.loading;
+        console.log('state empty?', (this.state.name===''));
         return (
             <div>
                 <div className="add-group">
-                    <div>Add a group</div>
+                    <div>
+                        <h2>Add a group</h2>
+                    </div>
                     <form onSubmit={(e) => this.onSubmit(e)}>
-                        <div>
-                            <label>Group Name : </label>
+                        <div className="field">
+                            <label>Group Name</label>
                             <input id="groupName" autoFocus={true} value={this.state.name}
                                    onChange={(e) => this.onGroupChange(e)}/>
                         </div>
-                        <div>
-                            <label>Description : </label>
+                        <div className="field">
+                            <label>Description </label>
                             <input id="groupDescription" value={this.state.description}
                                    onChange={(e) => this.onGroupDescChange(e)}/>
                         </div>
-                        <button type="submit">Add</button>
+
+                        <button type="submit" disabled={this.state.name===''}>Add</button>
                     </form>
                 </div>
                 <div className='groups-list'>
                     <div>
-                        <label> Please select a group: </label>
+                        <h2> Please select a group: </h2>
                     </div>
                     {this.coffeeGroupList(coffeeGroups, coffeeGroupsLoading)}
                 </div>
