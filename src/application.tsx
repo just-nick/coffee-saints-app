@@ -5,7 +5,7 @@ import AddSaintComponent from './app/saint/add-saint/add-saint.component';
 import BuyerComponent from './app/buyer/buyer.component';
 import SaintChooserComponent from './app/saint/saint-chooser/saint-chooser.component';
 import CoffeeGroupComponent from './app/coffee-group/coffee-group.component';
-
+import {LocationActions} from './app/location/location.actions';
 
 class Application extends React.Component<ProviderProps & DispatchProp<any>, {}> {
     constructor(props: ProviderProps & DispatchProp<any>) {
@@ -13,6 +13,8 @@ class Application extends React.Component<ProviderProps & DispatchProp<any>, {}>
     }
 
     render() {
+        this.props.dispatch(LocationActions.getCurrent());
+
         return (
             <BrowserRouter>
                 <div className="coffee-saints">
