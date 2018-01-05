@@ -1,7 +1,6 @@
 import {Location} from './location';
-import {LocationActions} from './location.actions';
 
-interface LocationStore {
+export interface LocationStore {
     apiReady: boolean;
     location: Location;
 }

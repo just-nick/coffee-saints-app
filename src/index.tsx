@@ -8,6 +8,6 @@ import './style/index.scss';
 let store = createStore();
 
 render(
-  <Application store={store} />,
+  <Application store={store}/>,
   document.getElementById('app')
 );

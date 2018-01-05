@@ -5,6 +5,7 @@ import {CoffeeGroup} from './coffee-group';
 import {CoffeeGroupActions} from './coffee-group.actions';
 import {CoffeeGroupStore} from './coffee-group.store';
 import {Link} from 'react-router-dom';
+import MapUIComponent from '../map-ui/map-ui.component';
 class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, CoffeeGroupComponentState> {
     constructor(props: CoffeeGroupComponentProps) {
         super(props);
@@ -42,6 +43,7 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
         console.log('state empty?', (this.state.name===''));
         return (
             <div>
+                <MapUIComponent/>
                 <div className="add-group">
                     <div>
                         <h2>Add a group</h2>
