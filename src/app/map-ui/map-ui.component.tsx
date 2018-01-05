@@ -8,11 +8,13 @@ class MapUIComponent extends React.Component<IMapUIProps, IMapUIState> {
     }
 
     render() {
-        if(this.props.mapsApiReducer.apiReady) {
+        if (this.props.mapsApiReducer.apiReady) {
             // const uluru = {
             //     lat: this.props.locationReducer.location.lat,
             //     lng: this.props.locationReducer.location.lng
             // };
+
+
 
             const sydney = {
                 lat: -33.873157,
@@ -20,24 +22,48 @@ class MapUIComponent extends React.Component<IMapUIProps, IMapUIState> {
             };
 
             const map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 4,
+                zoom: 17,
                 center: sydney
             });
+
+
             const marker = new google.maps.Marker({
                 position: sydney,
                 map: map
             });
+
+            this.setCurrentLocation(map, marker);
         }
         return (<div/>);
+    }
+
+    private setCurrentLocation(map: google.maps.Map, marker: google.maps.Marker): any {
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                const currentPosition = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                map.setCenter(currentPosition);
+                marker.setPosition(currentPosition);
+            }, function (e) {
+                console.log(e);
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            console.log('Browser does not support location');
+        }
     }
 }
 
 interface IMapUIProps extends DispatchProp<any> {
-    locationReducer : LocationStore;
+    locationReducer: LocationStore;
     mapsApiReducer: any;
 }
 
-interface IMapUIState {}
+interface IMapUIState {
+}
 
 export default connect<{}, {}, ProviderProps>((state) => ({
     locationReducer: state.locationReducer,
