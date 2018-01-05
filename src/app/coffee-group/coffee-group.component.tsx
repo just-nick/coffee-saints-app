@@ -88,13 +88,9 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
 
         return (
             <li key={index}>
-                <label htmlFor={'coffeeGroup' + coffeeGroup.id}>
-                    <li key={index}>
-                        <button onClick={selectGroup}>
-                            {coffeeGroup.name} - {coffeeGroup.description}
-                        </button>
-                    </li>
-                </label>
+                <button onClick={selectGroup}>
+                    {coffeeGroup.name} - {coffeeGroup.description}
+                </button>
             </li>
         );
     }
