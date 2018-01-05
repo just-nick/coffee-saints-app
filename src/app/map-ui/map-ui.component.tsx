@@ -9,12 +9,6 @@ class MapUIComponent extends React.Component<IMapUIProps, IMapUIState> {
 
     render() {
         if (this.props.mapsApiReducer.apiReady) {
-            // const uluru = {
-            //     lat: this.props.locationReducer.location.lat,
-            //     lng: this.props.locationReducer.location.lng
-            // };
-
-
 
             const sydney = {
                 lat: -33.873157,
@@ -22,13 +16,11 @@ class MapUIComponent extends React.Component<IMapUIProps, IMapUIState> {
             };
 
             const map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 17,
-                center: sydney
+                zoom: 17
             });
 
-
             const marker = new google.maps.Marker({
-                position: sydney,
+                position: null,
                 map: map
             });
 
