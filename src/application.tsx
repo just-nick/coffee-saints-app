@@ -1,14 +1,14 @@
+import {History} from 'history';
 import * as React from 'react';
 import {connect, DispatchProp, Provider, ProviderProps} from 'react-redux';
 import {BrowserRouter, Link, Route} from 'react-router-dom';
-import AddSaintComponent from './app/saint/add-saint/add-saint.component';
 import BuyerComponent from './app/buyer/buyer.component';
-import SaintChooserComponent from './app/saint/saint-chooser/saint-chooser.component';
 import CoffeeGroupComponent from './app/coffee-group/coffee-group.component';
 import {LocationActions} from './app/location/location.actions';
-import {History} from 'history';
-import LocationState = History.LocationState;
+import AddSaintComponent from './app/saint/add-saint/add-saint.component';
+import SaintChooserComponent from './app/saint/saint-chooser/saint-chooser.component';
 import {ShopActions} from './app/shop/shop.actions';
+import LocationState = History.LocationState;
 
 let readyToGo = true;
 
@@ -43,10 +43,11 @@ class Application extends React.Component<ProviderProps & DispatchProp<any> & {l
                                 <Route exact path="/groups/:coffeeGroupId/add-saint" component={AddSaintComponent as any}/>
                                 <Route exact path="/groups/:coffeeGroupId/who-buys" component={BuyerComponent as any}/>
                             </switch>
-                    </Provider>
+                        </Provider>
+                        <div id='map' />
+                    </div>
+                    <footer/>
                 </div>
-                <footer></footer>
-            </div>
             </BrowserRouter>
         );
     }
