@@ -9,13 +9,6 @@ class MapUIComponent extends React.Component<IMapUIProps, IMapUIState> {
 
     render() {
         if (this.props.mapsApiReducer.apiReady) {
-            // const uluru = {
-            //     lat: this.props.locationReducer.location.lat,
-            //     lng: this.props.locationReducer.location.lng
-            // };
-
-
-
             const sydney = {
                 lat: -33.873157,
                 lng: 151.206116

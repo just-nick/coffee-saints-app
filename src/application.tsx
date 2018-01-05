@@ -6,14 +6,26 @@ import BuyerComponent from './app/buyer/buyer.component';
 import SaintChooserComponent from './app/saint/saint-chooser/saint-chooser.component';
 import CoffeeGroupComponent from './app/coffee-group/coffee-group.component';
 import {LocationActions} from './app/location/location.actions';
+import {History} from 'history';
+import LocationState = History.LocationState;
+import {ShopActions} from './app/shop/shop.actions';
 
-class Application extends React.Component<ProviderProps & DispatchProp<any>, {}> {
-    constructor(props: ProviderProps & DispatchProp<any>) {
+let readyToGo = true;
+
+class Application extends React.Component<ProviderProps & DispatchProp<any> & {location: LocationState}, {}> {
+    constructor(props: ProviderProps & DispatchProp<any> & {location: LocationState}) {
         super(props);
     }
 
     render() {
-        this.props.dispatch(LocationActions.getCurrent());
+        if (readyToGo) {
+            this.props.dispatch(LocationActions.getCurrent());
+            readyToGo = false;
+        }
+
+        if (this.props.location) {
+            this.props.dispatch(ShopActions.findNearby(this.props.location));
+        }
 
         return (
             <BrowserRouter>
@@ -40,4 +52,6 @@ class Application extends React.Component<ProviderProps & DispatchProp<any>, {}>
     }
 }
 
-export default connect<{}, {}, ProviderProps>(() => ({}))(Application);
+export default connect<{}, {}, ProviderProps>((state) => ({
+    location: state.locationReducer
+}))(Application);

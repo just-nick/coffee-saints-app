@@ -5,6 +5,7 @@ export namespace MapsApiActions {
     let apiPromise: Promise<any>;
 
     export function setup(dispatch: any, getState: any) {
+        console.log('Setup', getState().mapsApiReducer.apiReady);
         if (getState().locationReducer.apiReady) {
             return Promise.resolve('');
         }
@@ -25,7 +26,7 @@ export namespace MapsApiActions {
 
             const script = document.createElement('script');
             const apiKey = 'AIzaSyBAfxcPHyQrLQBZj8rF9AkWBYAYgk-d_1s';
-            script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=googleMapsCallback`;
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=googleMapsCallback`;
             document.body.appendChild(script);
         }
 

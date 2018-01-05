@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {connect, DispatchProp} from 'react-redux';
-import {RouteComponentProps} from "react-router-dom";
+import {Link, RouteComponentProps} from 'react-router-dom';
 import {CoffeeGroup} from './coffee-group';
 import {CoffeeGroupActions} from './coffee-group.actions';
 import {CoffeeGroupStore} from './coffee-group.store';
-import {Link} from 'react-router-dom';
 import MapUIComponent from '../map-ui/map-ui.component';
+
 class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, CoffeeGroupComponentState> {
     constructor(props: CoffeeGroupComponentProps) {
         super(props);
@@ -39,8 +39,7 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
 
     public render() {
         let coffeeGroups = this.props.coffeeGroups.coffeeGroupsList.coffeeGroups;
-        let coffeeGroupsLoading =this.props.coffeeGroups.coffeeGroupsList.loading;
-        console.log('state empty?', (this.state.name===''));
+        let coffeeGroupsLoading = this.props.coffeeGroups.coffeeGroupsList.loading;
         return (
             <div>
                 <MapUIComponent/>
@@ -60,7 +59,7 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
                                    onChange={(e) => this.onGroupDescChange(e)}/>
                         </div>
 
-                        <button type="submit" disabled={this.state.name===''}>Add</button>
+                        <button type="submit" disabled={this.state.name === ''}>Add</button>
                     </form>
                 </div>
                 <div className='groups-list'>
@@ -73,8 +72,7 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
         )
     }
 
-    private coffeeGroupList (coffeeGroups: CoffeeGroup[], loading: boolean) {
-        console.log("coffeegroups" , coffeeGroups);
+    private coffeeGroupList(coffeeGroups: CoffeeGroup[], loading: boolean) {
         if (loading) {
             return (<div className="loading">Loading...</div>);
         }
@@ -91,7 +89,7 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
                 {/*<input name="coffeeGroupSelect" ref="coffeeGroupSelect" id={'coffeeGroup' + coffeeGroup.id} type="checkbox" value={coffeeGroup.id}/>*/}
                 <label htmlFor={'coffeeGroup' + coffeeGroup.id}>
                     <li key={index}>
-                        <Link to={"/groups/" + coffeeGroup.id}>
+                        <Link to={'/groups/' + coffeeGroup.id}>
                             {coffeeGroup.name} - {coffeeGroup.description}
                         </Link>
                     </li>
@@ -104,10 +102,10 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
 
 export default connect(
     (stateProvider) => {
-            return {
-                coffeeGroups: stateProvider.coffeeGroupReducer
-            }
+        return {
+            coffeeGroups: stateProvider.coffeeGroupReducer
         }
+    }
 )(CoffeeGroupComponent);
 
 

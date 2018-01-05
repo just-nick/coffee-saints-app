@@ -1,18 +1,22 @@
 import {Location} from './location';
+import {LocationActions} from './location.actions';
 
 export interface LocationStore {
-    apiReady: boolean;
     location: Location;
 }
 
 const initialState: LocationStore = {
-    apiReady: false,
     location: null
 };
 
 
 export function locationReducer(state: LocationStore = initialState, action: any): LocationStore {
     switch (action.type) {
+        case LocationActions.GET_LOCATION :
+            return {
+                location: action.location
+            };
+
         default:
             return state;
     }
