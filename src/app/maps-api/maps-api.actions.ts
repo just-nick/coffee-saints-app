@@ -5,7 +5,6 @@ export namespace MapsApiActions {
     let apiPromise: Promise<any>;
 
     export function setup(dispatch: any, getState: any) {
-        console.log('Setup', getState().mapsApiReducer.apiReady);
         if (getState().locationReducer.apiReady) {
             return Promise.resolve('');
         }

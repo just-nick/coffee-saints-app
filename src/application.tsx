@@ -12,8 +12,8 @@ import {ShopActions} from './app/shop/shop.actions';
 
 let readyToGo = true;
 
-class Application extends React.Component<ProviderProps & DispatchProp<any> & {location: LocationState}, {}> {
-    constructor(props: ProviderProps & DispatchProp<any> & {location: LocationState}) {
+class Application extends React.Component<ProviderProps & DispatchProp<any> & {locationReducer: LocationState}, {}> {
+    constructor(props: ProviderProps & DispatchProp<any> & {locationReducer: LocationState}) {
         super(props);
     }
 
@@ -23,8 +23,8 @@ class Application extends React.Component<ProviderProps & DispatchProp<any> & {l
             readyToGo = false;
         }
 
-        if (this.props.location) {
-            this.props.dispatch(ShopActions.findNearby(this.props.location));
+        if (this.props.locationReducer.location) {
+            this.props.dispatch(ShopActions.findNearby(this.props.locationReducer.location));
         }
 
         return (
@@ -53,5 +53,5 @@ class Application extends React.Component<ProviderProps & DispatchProp<any> & {l
 }
 
 export default connect<{}, {}, ProviderProps>((state) => ({
-    location: state.locationReducer
+    locationReducer: state.locationReducer
 }))(Application);

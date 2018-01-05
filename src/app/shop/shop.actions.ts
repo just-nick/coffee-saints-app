@@ -7,17 +7,12 @@ export namespace ShopActions {
 
     export function findNearby(location: Location): ThunkAction<any, any, any> {
         return (dispatch, getState) => {
-            console.log('Shop action');
-
             MapsApiActions.setup(dispatch, getState).then(() => {
-                console.log('Maps ready', location);
                 const dummyMap = document.createElement('div');
-                // const center = new google.maps.LatLng(location.lat, location.lng);
-                const center = new google.maps.LatLng(-33.873157, 151.206116);
+
+                const center = new google.maps.LatLng(location.lat, location.lng);
                 const map = new google.maps.Map(dummyMap, {center});
-
                 const service = new google.maps.places.PlacesService(map);
-
                 const request: google.maps.places.PlaceSearchRequest = {
                     location: center,
                     radius: 500,
@@ -27,11 +22,13 @@ export namespace ShopActions {
                 };
 
                 service.nearbySearch(request, (results, status) => {
-                    if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        console.log(results);
-                    } else {
-                        alert('OHH NOOO, NO COFFEE!!!!!!');
-                        console.log(status);
+                    switch (status) {
+                        case google.maps.places.PlacesServiceStatus.OK:
+                        case google.maps.places.PlacesServiceStatus.ZERO_RESULTS:
+                            console.log('Results found: ', results);
+                            break;
+                        default:
+                            console.log('Coffee search error', status, results);
                     }
                 });
             })
