@@ -1,10 +1,11 @@
 import * as React from 'react';
 import {connect, DispatchProp} from 'react-redux';
-import {Link, RouteComponentProps} from 'react-router-dom';
+import {RouteComponentProps} from 'react-router-dom';
+import MapUIComponent from '../map-ui/map-ui.component';
+import {UserActions} from '../user/user.actions';
 import {CoffeeGroup} from './coffee-group';
 import {CoffeeGroupActions} from './coffee-group.actions';
 import {CoffeeGroupStore} from './coffee-group.store';
-import MapUIComponent from '../map-ui/map-ui.component';
 
 class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, CoffeeGroupComponentState> {
     constructor(props: CoffeeGroupComponentProps) {
@@ -12,7 +13,6 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
         this.state = {
             name: '',
             description: '',
-            // coffeeGroups: []
         };
         this.props.dispatch(CoffeeGroupActions.get());
     }
@@ -78,24 +78,32 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
         }
         else {
             return (<ul className="coffee-group-list">{coffeeGroups.map((coffeeGroup, index) => {
-                return CoffeeGroupComponent.coffeeGroupItem(coffeeGroup, index);
+                return this.coffeeGroupItem(coffeeGroup, index);
             })}</ul>);
         }
     }
 
-    private static coffeeGroupItem(coffeeGroup: CoffeeGroup, index: number) {
+    private coffeeGroupItem(coffeeGroup: CoffeeGroup, index: number) {
+        const selectGroup = (e: React.SyntheticEvent<any>) => this.selectGroup(e, coffeeGroup.id);
+
         return (
             <li key={index}>
-                {/*<input name="coffeeGroupSelect" ref="coffeeGroupSelect" id={'coffeeGroup' + coffeeGroup.id} type="checkbox" value={coffeeGroup.id}/>*/}
                 <label htmlFor={'coffeeGroup' + coffeeGroup.id}>
                     <li key={index}>
-                        <Link to={'/groups/' + coffeeGroup.id}>
+                        <button onClick={selectGroup}>
                             {coffeeGroup.name} - {coffeeGroup.description}
-                        </Link>
+                        </button>
                     </li>
                 </label>
             </li>
         );
+    }
+
+    private selectGroup(e: React.SyntheticEvent<any>, groupId: number) {
+        e.preventDefault();
+
+        this.props.dispatch(UserActions.selectGroup(groupId));
+        this.props.history.push('/groups/' + groupId);
     }
 }
 
@@ -116,5 +124,4 @@ interface CoffeeGroupComponentProps extends DispatchProp<any>, RouteComponentPro
 interface CoffeeGroupComponentState {
     name: string;
     description: string;
-    // coffeeGroups: CoffeeGroup[];
 }
