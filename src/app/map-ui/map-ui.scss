@@ -2,6 +2,7 @@ import * as React from 'react';
 import {connect, DispatchProp, ProviderProps} from 'react-redux';
 import {LocationStore} from '../location/location.reducer';
 import {LocationActions} from '../location/location.actions';
+import * as ReactDOM from 'react-dom';
 
 class MapUIComponent extends React.Component<IMapUIProps, IMapUIState> {
     constructor(props: IMapUIProps) {
@@ -10,11 +11,15 @@ class MapUIComponent extends React.Component<IMapUIProps, IMapUIState> {
 
     render() {
         const currentPosition = this.props.locationReducer.location;
-
         if (!currentPosition) {
             this.props.dispatch(LocationActions.getCurrent());
         } else {
-            const map = new google.maps.Map(document.getElementById('map'), {
+
+            const base = ReactDOM.findDOMNode(this);
+
+            console.log('---->', base.parentNode);
+
+            const map = new google.maps.Map(base, {
                 zoom: 17,
                 center: currentPosition
             });
@@ -24,7 +29,7 @@ class MapUIComponent extends React.Component<IMapUIProps, IMapUIState> {
                 map: map
             });
         }
-        return (<div/>);
+        return <div/>;
     }
 }
 

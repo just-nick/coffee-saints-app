@@ -1,11 +1,10 @@
 import * as React from 'react';
 import {connect, DispatchProp} from 'react-redux';
-import {RouteComponentProps} from "react-router-dom";
+import {Link, RouteComponentProps} from 'react-router-dom';
 import {CoffeeGroup} from './coffee-group';
 import {CoffeeGroupActions} from './coffee-group.actions';
 import {CoffeeGroupStore} from './coffee-group.store';
-import {Link} from 'react-router-dom';
-import MapUIComponent from '../map-ui/map-ui.component';
+
 class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, CoffeeGroupComponentState> {
     constructor(props: CoffeeGroupComponentProps) {
         super(props);
@@ -43,7 +42,6 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
         console.log('state empty?', (this.state.name===''));
         return (
             <div>
-                <MapUIComponent/>
                 <div className="add-group">
                     <div>
                         <h2>Add a group</h2>
@@ -60,7 +58,7 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
                                    onChange={(e) => this.onGroupDescChange(e)}/>
                         </div>
 
-                        <button type="submit" disabled={this.state.name===''}>Add</button>
+                        <button type="submit" disabled={this.state.name === ''}>Add</button>
                     </form>
                 </div>
                 <div className='groups-list'>
