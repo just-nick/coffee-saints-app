@@ -4,3 +4,14 @@
         cursor: not-allowed;
     }
 }
+
+.coffee-group-list {
+    list-style: none;
+    display: block;
+    padding: 0;
+
+    li {
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+}

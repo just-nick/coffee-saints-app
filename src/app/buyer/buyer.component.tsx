@@ -1,10 +1,11 @@
-import * as React from "react";
-import {connect, DispatchProp} from "react-redux";
-import {RouteComponentProps} from "react-router-dom";
-import {BuyerStore} from "./buyer.store";
-import {BuyerActions} from "./buyer.actions";
-import {SaintStore} from '../saint/saint.store';
+import * as React from 'react';
+import {connect, DispatchProp} from 'react-redux';
+import {RouteComponentProps} from 'react-router-dom';
 import {Saint} from '../saint/saint';
+import {SaintStore} from '../saint/saint.store';
+import {UserActions} from '../user/user.actions';
+import {BuyerActions} from './buyer.actions';
+import {BuyerStore} from './buyer.store';
 
 export class BuyerComponent extends React.Component<BuyerComponentProps, BuyComponentState> {
     constructor(props: BuyerComponentProps) {
@@ -13,6 +14,8 @@ export class BuyerComponent extends React.Component<BuyerComponentProps, BuyComp
             selectedBuyer: -1,
             chooseSomeoneElse: false
         }
+
+        this.props.dispatch(UserActions.selectGroup(this.props.match.params.coffeeGroupId));
     }
 
     public componentDidMount() {

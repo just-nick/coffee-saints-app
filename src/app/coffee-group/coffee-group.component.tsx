@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {connect, DispatchProp} from 'react-redux';
-import {Link, RouteComponentProps} from 'react-router-dom';
+import {RouteComponentProps} from 'react-router-dom';
+import MapUIComponent from '../map-ui/map-ui.component';
+import {UserActions} from '../user/user.actions';
 import {CoffeeGroup} from './coffee-group';
 import {CoffeeGroupActions} from './coffee-group.actions';
 import {CoffeeGroupStore} from './coffee-group.store';
@@ -11,7 +13,6 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
         this.state = {
             name: '',
             description: '',
-            // coffeeGroups: []
         };
         this.props.dispatch(CoffeeGroupActions.get());
     }
@@ -42,6 +43,7 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
         console.log('state empty?', (this.state.name===''));
         return (
             <div>
+                <MapUIComponent/>
                 <div className="add-group">
                     <div>
                         <h2>Add a group</h2>
@@ -71,8 +73,7 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
         )
     }
 
-    private coffeeGroupList (coffeeGroups: CoffeeGroup[], loading: boolean) {
-        console.log("coffeegroups" , coffeeGroups);
+    private coffeeGroupList(coffeeGroups: CoffeeGroup[], loading: boolean) {
         if (loading) {
             return (<div className="loading">Loading...</div>);
         }
@@ -83,13 +84,15 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
         }
     }
 
-    private static coffeeGroupItem(coffeeGroup: CoffeeGroup, index: number) {
+    private coffeeGroupItem(coffeeGroup: CoffeeGroup, index: number) {
+        const selectGroup = (e: React.SyntheticEvent<any>) => this.selectGroup(e, coffeeGroup.id);
+
         return (
             <li key={index}>
                 {/*<input name="coffeeGroupSelect" ref="coffeeGroupSelect" id={'coffeeGroup' + coffeeGroup.id} type="checkbox" value={coffeeGroup.id}/>*/}
                 <label htmlFor={'coffeeGroup' + coffeeGroup.id}>
                     <li key={index}>
-                        <Link to={"/groups/" + coffeeGroup.id}>
+                        <Link to={'/groups/' + coffeeGroup.id}>
                             {coffeeGroup.name} - {coffeeGroup.description}
                         </Link>
                     </li>
@@ -97,15 +100,22 @@ class CoffeeGroupComponent extends React.Component<CoffeeGroupComponentProps, Co
             </li>
         );
     }
+
+    private selectGroup(e: React.SyntheticEvent<any>, groupId: number) {
+        e.preventDefault();
+
+        this.props.dispatch(UserActions.selectGroup(groupId));
+        this.props.history.push('/groups/' + groupId);
+    }
 }
 
 
 export default connect(
     (stateProvider) => {
-            return {
-                coffeeGroups: stateProvider.coffeeGroupReducer
-            }
+        return {
+            coffeeGroups: stateProvider.coffeeGroupReducer
         }
+    }
 )(CoffeeGroupComponent);
 
 
