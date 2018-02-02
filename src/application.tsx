@@ -9,6 +9,9 @@ import AddSaintComponent from './app/saint/add-saint/add-saint.component';
 import SaintChooserComponent from './app/saint/saint-chooser/saint-chooser.component';
 import {ShopActions} from './app/shop/shop.actions';
 import LocationState = History.LocationState;
+import {FindCoffeeModalComponent} from './app/find-coffee/find-coffee-modal.component';
+import LoginComponent from './app/login-registration/login.component';
+import RegistrationComponent from './app/login-registration/registration.component';
 
 let readyToGo = true;
 
@@ -38,13 +41,15 @@ class Application extends React.Component<ProviderProps & DispatchProp<any> & {l
                     <div className="body">
                         <Provider store={this.props.store}>
                             <switch>
-                                <Route exact path="/" component={CoffeeGroupComponent as any}/>
+                                <Route exact path="/coffee" component={CoffeeGroupComponent as any}/>
+                                <Route exact path="/" component={LoginComponent as any}/>
+                                <Route exact path="/register" component={RegistrationComponent}/>
+                                <Route exact path="/find-coffee" component={FindCoffeeModalComponent}/>
                                 <Route exact path="/groups/:coffeeGroupId" component={SaintChooserComponent as any}/>
                                 <Route exact path="/groups/:coffeeGroupId/add-saint" component={AddSaintComponent as any}/>
                                 <Route exact path="/groups/:coffeeGroupId/who-buys" component={BuyerComponent as any}/>
                             </switch>
                         </Provider>
-                        <div id='map' />
                     </div>
                     <footer/>
                 </div>

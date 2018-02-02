@@ -6,7 +6,7 @@ import {SaintStore} from "../saint.store";
 import {RouteComponentProps} from "react-router";
 import {BuyerActions} from "../../buyer/buyer.actions";
 import {SaintActions} from '../saint.actions';
-import {FindCoffeeComponent} from '../../find-coffee/find-coffee.component';
+import FindCoffeeComponent from '../../find-coffee/find-coffee.component';
 
 class SaintChooserComponent extends React.Component<SaintChooserComponentProps, SaintChooserComponentState> {
     constructor(props: SaintChooserComponentProps) {

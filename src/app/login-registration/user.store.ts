@@ -1,8 +1,6 @@
-import {Saint} from "../saint/saint";
+import User from './user';
 
-export interface BuyerStore {
-    buyer: Saint,
-    consumerIds: number[],
-    discover: boolean,
-    loading: boolean
+export default interface UserStore {
+    loading: boolean,
+    user: User
 }

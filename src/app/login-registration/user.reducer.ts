@@ -1,52 +1,49 @@
-import {BuyerActions} from './buyer.actions';
-import {BuyerStore} from './buyer.store';
+import UserStore from './user.store';
 import {ApiRequestAction} from "../common/api-request.action";
+import {UserActions} from './user.actions';
 
-let initialState: BuyerStore = {
-    buyer: null,
-    consumerIds: [],
-    discover: false,
-    loading: true
+
+let initialState: UserStore = {
+    loading: false,
+    user: null
 };
 
-export function buyerReducer(state: BuyerStore = initialState, action: ApiRequestAction): BuyerStore {
+export function userReducer(state: UserStore = initialState, action: ApiRequestAction): UserStore {
+    console.log('userReducer',action.type, action.payload);
     switch (action.type) {
-        case BuyerActions.FIND_BUYER:
-            return {
-                ...state,
-                discover: true,
-                loading: true,
-                consumerIds: action.meta.saintIds
-            };
-
-        case BuyerActions.FIND_BUYER_SUCCESS:
-            return {
-                ...state,
-                buyer: action.payload,
-                discover: true,
-                loading: false
-            };
-
-        case BuyerActions.FIND_BUYER_FAILURE:
-            console.error('FIND_BUYER_FAILURE', action);
-            return state;
-
-
-        case BuyerActions.BUY:
+        case UserActions.LOGIN:
             return {
                 ...state,
                 loading: true
             };
 
-        case BuyerActions.BUY_SUCCESS:
+        case UserActions.LOGIN_SUCCESS:
             return {
                 ...state,
-                buyer: action.payload,
-                discover: false
+                loading: false,
+                user: action.payload
             };
 
-        case BuyerActions.BUY_FAILURE:
-            console.error('BUY_FAILURE', action);
+        case UserActions.LOGIN_FAILURE:
+            console.error('FIND_BUYER_FAILURE', action);
+            return state;
+
+
+        case UserActions.REGISTER:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case UserActions.REGISTER_SUCCESS:
+            return {
+                ...state,
+                user: action.payload,
+                loading: true
+            };
+
+        case UserActions.REGISTER_FAILURE:
+            console.error('REGISTER_FAILURE', action);
             return state;
 
         default:
