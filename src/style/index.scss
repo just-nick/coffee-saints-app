@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,800');
+@import './base/colours';
+@import './base/type';
+@import './base/icons';
+@import './base/forms';
+@import './components/button';
+@import './components/action.scss';
+@import './components/loading-icon';
+@import './components/navbar';
+@import './components/footer';
+@import './components/saint-list';
+@import '../app/saint/saint-chooser/saint-chooser';
+@import '../app/coffee-group/coffee-group';
+
+body {
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+button, input, p, select {
+    font-size: 1rem;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.coffee-saints {
+    animation: fade-in 1s;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #FFF;
+
+    header {
+        @extend %navbar;
+
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+
+    footer {
+        @extend %footer;
+    }
+
+    .body {
+        flex: 1;
+        padding: 2rem 0.8rem;
+    }
+}

@@ -42,8 +42,7 @@ export function buyerReducer(state: BuyerStore = initialState, action: ApiReques
             return {
                 ...state,
                 buyer: action.payload,
-                discover: false,
-                loading: false
+                discover: false
             };
 
         case BuyerActions.BUY_FAILURE:

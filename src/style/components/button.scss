@@ -1,0 +1,23 @@
+%button {
+    display: block;
+    padding: 0.8rem 1rem;
+    line-height: 1;
+    border: 0;
+    border-radius: 0.5rem;
+    background: color('main');
+    color: color('main', 'inverse');
+    width: 100%;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    &:hover {
+        background: color('main', 'alt');
+    }
+}
+
+button,
+.button {
+    @extend %button;
+
+
+}

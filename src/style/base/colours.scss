@@ -1,0 +1,19 @@
+$colors: (
+    'main': (
+        'main': #3e6270,
+        'alt': #1c848f,
+        'inverse': #ffffff
+    ),
+    'highlight': (
+        'main': #ef7b7c,
+        'inverse': #ffffff
+    ),
+    'subtle': (
+        'main': #f2f2f2,
+        'inverse': #444444
+    )
+);
+
+@function color($name, $variant: 'main') {
+    @return map-get(map-get($colors, $name), $variant);
+}

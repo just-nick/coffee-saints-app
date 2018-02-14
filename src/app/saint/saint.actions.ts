@@ -12,18 +12,18 @@ export namespace SaintActions {
 
     // @TODO Programmatically generating API states
 
-    export function add(saint: Saint) {
+    export function add(coffeeGroupId: string, saint: Saint) {
         return ApiRequestFactory.post(
             [ADD_SAINT, ADD_SAINT_SUCCESS, ADD_SAINT_FAILURE],
-            '/api/saints',
+            '/api/coffee-groups/' + coffeeGroupId + '/saints',
             saint
         );
     }
 
-    export function find() {
+    export function find(coffeeGroupId: string) {
         return ApiRequestFactory.get(
             [FIND_SAINT, FIND_SAINT_SUCCESS, FIND_SAINT_FAILURE],
-            '/api/saints'
+            '/api/coffee-groups/' + coffeeGroupId + '/saints'
         )
     }
 }

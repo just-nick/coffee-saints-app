@@ -1,0 +1,29 @@
+.action {
+    @extend %action;
+}
+
+%action {
+    position: relative;
+    border-radius: 50%;
+    background: color('main');
+    color: color('main', 'inverse');
+    display: block;
+    width: 4rem;
+    height: 4rem;
+    overflow: hidden;
+    text-indent: -999999px;
+
+    &::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        content: '+';
+        font-size: 4rem;
+        line-height: 4rem;
+        text-align: center;
+        font-weight: 800;
+        text-indent: 0;
+    }
+}
