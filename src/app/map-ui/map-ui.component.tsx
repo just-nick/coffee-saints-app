@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {connect, DispatchProp, ProviderProps} from 'react-redux';
 import {LocationStore} from '../location/location.reducer';
-import {LocationActions} from '../location/location.actions';
 
 class MapUIComponent extends React.Component<IMapUIProps, IMapUIState> {
     constructor(props: IMapUIProps) {
@@ -9,22 +8,44 @@ class MapUIComponent extends React.Component<IMapUIProps, IMapUIState> {
     }
 
     render() {
-        const currentPosition = this.props.locationReducer.location;
+        if (this.props.mapsApiReducer.apiReady) {
 
-        if (!currentPosition) {
-            this.props.dispatch(LocationActions.getCurrent());
-        } else {
+            const sydney = {
+                lat: -33.873157,
+                lng: 151.206116
+            };
+
             const map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 17,
-                center: currentPosition
+                zoom: 17
             });
 
-            new google.maps.Marker({
-                position: currentPosition,
+            const marker = new google.maps.Marker({
+                position: null,
                 map: map
             });
+
+            this.setCurrentLocation(map, marker);
         }
         return (<div/>);
+    }
+
+    private setCurrentLocation(map: google.maps.Map, marker: google.maps.Marker): any {
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                const currentPosition = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                map.setCenter(currentPosition);
+                marker.setPosition(currentPosition);
+            }, function (e) {
+                console.log(e);
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            console.log('Browser does not support location');
+        }
     }
 }
 

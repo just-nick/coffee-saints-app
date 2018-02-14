@@ -25,7 +25,7 @@ export namespace MapsApiActions {
 
             const script = document.createElement('script');
             const apiKey = 'AIzaSyBAfxcPHyQrLQBZj8rF9AkWBYAYgk-d_1s';
-            script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=googleMapsCallback`;
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=googleMapsCallback`;
             document.body.appendChild(script);
         }
 
