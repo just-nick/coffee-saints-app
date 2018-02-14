@@ -50,7 +50,6 @@ class Application extends React.Component<ProviderProps & DispatchProp<any> & {l
                                 <Route exact path="/groups/:coffeeGroupId/who-buys" component={BuyerComponent as any}/>
                             </switch>
                         </Provider>
-                        <div id='map'/>
                     </div>
                     <footer/>
                 </div>

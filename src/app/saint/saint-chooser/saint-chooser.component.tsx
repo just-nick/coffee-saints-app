@@ -1,13 +1,12 @@
 import * as React from 'react';
 import {connect, DispatchProp} from 'react-redux';
-import {RouteComponentProps} from 'react-router';
-import {Link} from 'react-router-dom';
-import {BuyerActions} from '../../buyer/buyer.actions';
-import {UserActions} from '../../user/user.actions';
-import {Saint} from '../saint';
+import {Link} from "react-router-dom";
+import {Saint} from "../saint";
+import {SaintStore} from "../saint.store";
+import {RouteComponentProps} from "react-router";
+import {BuyerActions} from "../../buyer/buyer.actions";
 import {SaintActions} from '../saint.actions';
 import FindCoffeeComponent from '../../find-coffee/find-coffee.component';
-import {SaintStore} from '../saint.store';
 
 class SaintChooserComponent extends React.Component<SaintChooserComponentProps, SaintChooserComponentState> {
     constructor(props: SaintChooserComponentProps) {
@@ -16,7 +15,6 @@ class SaintChooserComponent extends React.Component<SaintChooserComponentProps, 
             selectedSaints: []
         };
 
-        this.props.dispatch(UserActions.selectGroup(this.props.match.params.coffeeGroupId));
         this.props.dispatch(SaintActions.find(this.props.match.params.coffeeGroupId));
     }
 

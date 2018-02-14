@@ -1,9 +1,8 @@
 import * as React from 'react';
 import {connect, DispatchProp} from 'react-redux';
-import {RouteComponentProps} from 'react-router-dom';
-import {UserActions} from '../../user/user.actions';
-import {Saint} from '../saint';
 import {SaintActions} from '../saint.actions';
+import {Saint} from '../saint';
+import {RouteComponentProps} from "react-router-dom";
 
 class AddSaintComponent extends React.Component<AddSaintComponentProps, AddSaintComponentState> {
     constructor(props: AddSaintComponentProps) {
@@ -11,8 +10,6 @@ class AddSaintComponent extends React.Component<AddSaintComponentProps, AddSaint
         this.state = {
             name: ''
         }
-
-        this.props.dispatch(UserActions.selectGroup(this.props.match.params.coffeeGroupId));
     }
 
     private onSubmit(e: React.FormEvent<any>) {
