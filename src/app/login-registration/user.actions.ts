@@ -1,33 +1,29 @@
 import {ApiRequestFactory} from '../common/api-request.factory';
 
-export namespace UserActions {
-    export const LOGIN = 'LOGIN';
-    export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-    export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export namespace BuyerActions {
+    export const FIND_BUYER = 'FIND_BUYER';
+    export const FIND_BUYER_SUCCESS = 'FIND_BUYER_SUCCESS';
+    export const FIND_BUYER_FAILURE = 'FIND_BUYER_FAILURE';
 
-    export const REGISTER = 'REGISTER';
-    export const REGISTER_SUCCESS = Symbol('REGISTER_SUCCESS');
-    export const REGISTER_FAILURE = Symbol('REGISTER_FAILURE');
+    export const BUY = Symbol('BUY');
+    export const BUY_SUCCESS = Symbol('BUY_SUCCESS');
+    export const BUY_FAILURE = Symbol('BUY_FAILURE');
 
-    export function login(username: string, password: string) {
-        // return ApiRequestFactory.get(
-        //     [{
-        //         type: LOGIN,
-        //         meta: {username, password}
-        //     }, LOGIN_SUCCESS, LOGIN_FAILURE],
-        //     '/api/login/')
-        console.log('login action', username, password);
-        return {
-            type: LOGIN_SUCCESS,
-            payload: {username, password}
-        }
+    export function find(coffeeGroupId: string, saintIds: number[]) {
+        return ApiRequestFactory.get(
+            [{
+                type: FIND_BUYER,
+                meta: {saintIds}
+            }, FIND_BUYER_SUCCESS, FIND_BUYER_FAILURE],
+            '/api/coffee-groups/' + coffeeGroupId + '/saints/buying?saintIds=' + saintIds.join(',')
+        )
     }
 
-    export function register(username: string, password: string) {
+    export function buy(coffeeGroupId: string, buyerId: number, saintIds: number[]) {
         return ApiRequestFactory.post(
-            [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE],
-            '/api/register',
-            {username: username, password: password}
+            [BUY, BUY_SUCCESS, BUY_FAILURE],
+            '/api/coffee-groups/' + coffeeGroupId + '/saints/' + buyerId + '/buying',
+            saintIds
         );
     }
 }

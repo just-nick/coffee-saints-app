@@ -1,49 +1,52 @@
-import UserStore from './user.store';
+import {BuyerActions} from './buyer.actions';
+import {BuyerStore} from './buyer.store';
 import {ApiRequestAction} from "../common/api-request.action";
-import {UserActions} from './user.actions';
 
-
-let initialState: UserStore = {
-    loading: false,
-    user: null
+let initialState: BuyerStore = {
+    buyer: null,
+    consumerIds: [],
+    discover: false,
+    loading: true
 };
 
-export function userReducer(state: UserStore = initialState, action: ApiRequestAction): UserStore {
-    console.log('userReducer',action.type, action.payload);
+export function buyerReducer(state: BuyerStore = initialState, action: ApiRequestAction): BuyerStore {
     switch (action.type) {
-        case UserActions.LOGIN:
+        case BuyerActions.FIND_BUYER:
             return {
                 ...state,
-                loading: true
+                discover: true,
+                loading: true,
+                consumerIds: action.meta.saintIds
             };
 
-        case UserActions.LOGIN_SUCCESS:
+        case BuyerActions.FIND_BUYER_SUCCESS:
             return {
                 ...state,
-                loading: false,
-                user: action.payload
+                buyer: action.payload,
+                discover: true,
+                loading: false
             };
 
-        case UserActions.LOGIN_FAILURE:
+        case BuyerActions.FIND_BUYER_FAILURE:
             console.error('FIND_BUYER_FAILURE', action);
             return state;
 
 
-        case UserActions.REGISTER:
+        case BuyerActions.BUY:
             return {
                 ...state,
                 loading: true
             };
 
-        case UserActions.REGISTER_SUCCESS:
+        case BuyerActions.BUY_SUCCESS:
             return {
                 ...state,
-                user: action.payload,
-                loading: true
+                buyer: action.payload,
+                discover: false
             };
 
-        case UserActions.REGISTER_FAILURE:
-            console.error('REGISTER_FAILURE', action);
+        case BuyerActions.BUY_FAILURE:
+            console.error('BUY_FAILURE', action);
             return state;
 
         default:
